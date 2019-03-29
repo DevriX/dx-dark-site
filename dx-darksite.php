@@ -8,7 +8,7 @@
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: dark_site
- */ 
+ */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 define( 'DX_DARKSITE_PATH', plugin_dir_path( __FILE__ ) );
