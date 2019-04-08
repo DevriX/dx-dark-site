@@ -64,7 +64,7 @@ function dx_settings_page() {
             <?php  wp_editor( $editor_content, $editor_id ); ?>
         </p>
 		<p class="submit">
-            <?php submit_button( 'save' ); ?>
+            <?php submit_button( 'save', 'primary' ); ?>
 		</p>
 	</form>
 </div>
