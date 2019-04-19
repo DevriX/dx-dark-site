@@ -37,7 +37,6 @@ function dx_darksite_redirect() {
 }
 add_action( 'template_redirect', 'dx_darksite_redirect' );
 
-// TODO: Add Banner!
 
 function dx_darksite_notice() {
 	if ( ! empty( get_option( 'dx_my_editor' ) ) ) {
@@ -86,7 +85,7 @@ function dx_set_darksite_cookie() {
 				currentDate = new Date();
 				currentDate.setTime(currentDate.getTime()+(days*24*60*60*1000));
 				document.cookie = 'dx_darksite_note=closed; expires=' + currentDate.toGMTString();
-/*				jQuery('body').css('padding-top', '151px' );*/
+				jQuery('body').css('padding-top', '150px' );
 				jQuery('.darksite-notice').hide();
 			}
 		</script> <?php

@@ -22,11 +22,9 @@ add_action('admin_menu', 'dx_add_menu_page');
  * Adds the settigns fields and saves the data of them to wp_options table
  *
  */
-
 function dx_settings_page() {
 
-    if (!current_user_can('manage_options'))
-    {
+    if ( ! current_user_can('manage_options' ) ) {
       wp_die( __('You do not have sufficient permissions to access this page.') );
     }
 
@@ -34,8 +32,12 @@ function dx_settings_page() {
     $opt_name_redirect = 'dx_redirect_to';
     $data_field_name_redirect = 'redirect_to';
 
-    $editor_content = '';
     $editor_id = 'dx_my_editor';
+    if( ! empty( get_option( $editor_id ) ) ) {
+        $editor_content = get_option( $editor_id );
+    } else {
+        $editor_content = '';
+    }
 
     $opt_val_redirect = get_option( $opt_name_redirect );
 
