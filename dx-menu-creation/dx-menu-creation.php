@@ -29,7 +29,7 @@ function dx_settings_page() {
 
     // set all input names as php vars
     $dx_hidden_field_name = 'dx_submit_hidden';
-    $dx_name_redirect = 'dx_redirect_to';
+    $dx_redirect_name = 'dx_redirect_to';
     $dx_margin_field_name = 'dx_margin_top';
     $dx_editor_id = 'dx_my_editor';
 
@@ -40,8 +40,8 @@ function dx_settings_page() {
         $dx_editor_content = '';
     }
 
-    if( ! empty( get_option( $dx_name_redirect ) ) ) {
-        $dx_redirect_value = get_option( $dx_name_redirect );
+    if( ! empty( get_option( $dx_redirect_name ) ) ) {
+        $dx_redirect_value = get_option( $dx_redirect_name );
     } else {
         $dx_redirect_value = '';
     }
@@ -54,13 +54,13 @@ function dx_settings_page() {
 
     // saves data from the 3 input fields in wp_options table
     if( isset( $_POST[ $dx_hidden_field_name ]) && $_POST[ $dx_hidden_field_name ] == 'Y' ) {
-        $dx_redirect_value = $_POST[ $dx_name_redirect ];
+        $dx_redirect_value = $_POST[ $dx_redirect_name ];
         $dx_editor_content = $_POST[ $dx_editor_id ];
         $dx_margin_field_value = $_POST[ $dx_margin_field_name ];
 
-        $dx_sanitized_content = sanitize_text_field( htmlentities( $_POST[ $dx_editor_id ] ) );
+        $dx_sanitized_content = sanitize_text_field( htmlentities( $dx_editor_content ) );
 
-        update_option( $dx_name_redirect, $dx_redirect_value );
+        update_option( $dx_redirect_name, $dx_redirect_value );
         update_option( $dx_editor_id, $dx_sanitized_content );
         update_option( $dx_margin_field_name, $dx_margin_field_value );
         ?> <div class="updated"><p><strong><?php _e('Settings saved.', 'dx_dark_site' ); ?></strong></p></div> <?php
@@ -71,7 +71,7 @@ function dx_settings_page() {
     		<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
     		<h3> <?php _e( 'REDIRECTION', 'dx_dark_site' ); ?></h3>
     		<p><?php _e("Redirect to:", 'dx_dark_site' ); ?>
-    			<input type="text" name="<?php echo $dx_name_redirect; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
+    			<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
     		</p><hr />
     		<h3> <?php _e( 'BANNER', 'dx_dark_site' ); ?></h3>
             <p>
