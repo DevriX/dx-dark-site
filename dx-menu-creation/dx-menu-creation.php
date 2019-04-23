@@ -12,7 +12,7 @@
  *
  */
 function dx_add_menu_page() {
-    add_options_page( __('Dark Site','dx_dark_site'), __('Dark Site','dx_dark_site'), 'manage_options', 'dx-darksite-settings', 'dx_settings_page' );
+    add_options_page( __('Dark Site','dx-dark-site'), __('Dark Site','dx-dark-site'), 'manage_options', 'dx-darksite-settings', 'dx_settings_page' );
 }
 add_action( 'admin_menu', 'dx_add_menu_page' );
 
@@ -59,25 +59,27 @@ function dx_settings_page() {
         $dx_margin_field_value = $_POST[ $dx_margin_field_name ];
 
         $dx_sanitized_content = sanitize_text_field( htmlentities( $dx_editor_content ) );
+        $dx_sanitized_url = esc_url( $dx_redirect_value );
+        $dx_sanitized_margin = esc_html( $dx_margin_field_value );
 
-        update_option( $dx_redirect_name, $dx_redirect_value );
+        update_option( $dx_redirect_name, $dx_sanitized_url );
         update_option( $dx_editor_id, $dx_sanitized_content );
-        update_option( $dx_margin_field_name, $dx_margin_field_value );
-        ?> <div class="updated"><p><strong><?php _e('Settings saved.', 'dx_dark_site' ); ?></strong></p></div> <?php
+        update_option( $dx_margin_field_name, $dx_sanitized_margin );
+        ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
     } ?>
     <div class="wrap">
-    	<h2><?php _e( 'Dark Site', 'dx_dark_site' ); ?></h2>
+    	<h2><?php _e( 'Dark Site', 'dx-dark-site' ); ?></h2>
     	<form name="form1" method="post" action="">
     		<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
-    		<h3> <?php _e( 'REDIRECTION', 'dx_dark_site' ); ?></h3>
-    		<p><?php _e("Redirect to:", 'dx_dark_site' ); ?>
+    		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site' ); ?></h3>
+    		<p><?php _e("Redirect to:", 'dx-dark-site' ); ?>
     			<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
     		</p><hr />
-    		<h3> <?php _e( 'BANNER', 'dx_dark_site' ); ?></h3>
+    		<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
             <p>
                 <?php wp_editor( $dx_editor_content, $dx_editor_id ); ?>
             </p>
-            <p> <?php _e( "Margin from top (in rem Units) :", 'dx_dark_site' ); ?>
+            <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
                 <input type="number" name="<?php echo $dx_margin_field_name?>" value="<?php echo $dx_margin_field_value ?>" min=0 max=20>
             </p>
     		<p class="submit">

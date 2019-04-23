@@ -12,7 +12,8 @@ Plugin to use when something on the site is broken, not fully working, or worst 
 == Description ==
 
 Unfortunately, sometimes features of a site are not working propperly- pages are not loading, payment systems are not working, etc.
-We created this plugin with the idea of dealing with emergencies on the site. It has two major features:
+We created this plugin with the idea of dealing with emergencies on the site, by keeping your site private to logged users only or informing the users that the site is not fully functional.
+It has two major features:
 	1. A redirection field, which when added URL to it will redirect the whole site to the URL for all non-logged users. For example, a pre-created page that informs the user that the site is under construction or down.
 	2. A  WYSIWYG redactor, which renders a bar over the whole site in the header. The bar can have custom content in it and when closed a cookie is loaded for 12 hours. While the cookie is enabled the notice won't show for the user, but once the cookie expires the notice shows again.  This is added with the idea of informing the users that something is not working properly. For example "Sorry, our payment systems are not working at the moment".
 

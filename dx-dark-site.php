@@ -5,9 +5,9 @@
  * Version:		1.0.0
  * Author:      DevriX
  * Author URI:  https://devrix.com/
- * License:     GPL2
+ * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: dx_dark_site
+ * Text Domain: dx-dark-site
  */
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
