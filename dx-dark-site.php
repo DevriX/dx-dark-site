@@ -48,13 +48,19 @@ function dx_darksite_notice() {
 				$dx_margin_top = get_option( 'dx_margin_top' );
 			} else {
 				$dx_margin_top = 0;
-			} ?>
+			} 
+			$dx_editor_content = get_option( 'dx_my_editor' );
+			$dx_unslashed_content = wp_unslash( $dx_editor_content );
+			
+			$dx_content = wp_kses_data( $dx_unslashed_content );
+
+			?>
 			<div class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
 						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/dx_exc_mark.png' ?>" alt="warning">
 					</div>
-					<div class="darksite-notice-content"><?php echo get_option( 'dx_my_editor' ); ?></div>
+					<div class="darksite-notice-content"><?php echo $dx_content; ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div>
 			</div>

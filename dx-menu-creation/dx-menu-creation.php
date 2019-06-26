@@ -35,7 +35,7 @@ function dx_settings_page() {
 
     // checks if the 3 fields have data stored
     if( ! empty( get_option( $dx_editor_id ) ) ) {
-        $dx_editor_content = get_option( $dx_editor_id );
+        $dx_editor_content =  ( get_option( $dx_editor_id ) );
     } else {
         $dx_editor_content = '';
     }
@@ -58,13 +58,13 @@ function dx_settings_page() {
         $dx_editor_content = $_POST[ $dx_editor_id ];
         $dx_margin_field_value = $_POST[ $dx_margin_field_name ];
 
-        $dx_sanitized_content = sanitize_text_field( htmlentities( $dx_editor_content ) );
+        $dx_sanitized_content = $dx_editor_content;
         $dx_sanitized_url = esc_url( $dx_redirect_value );
         $dx_sanitized_margin = esc_html( $dx_margin_field_value );
 
         update_option( $dx_redirect_name, $dx_sanitized_url );
-        update_option( $dx_editor_id, $dx_sanitized_content );
-        update_option( $dx_margin_field_name, $dx_sanitized_margin );
+        update_option( $dx_editor_id, $dx_editor_content );
+        update_option( $dx_margin_field_name, esc_html( $dx_sanitized_margin ) );
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
     } ?>
     <div class="wrap">
@@ -77,7 +77,8 @@ function dx_settings_page() {
     		</p><hr />
     		<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
             <p>
-                <?php wp_editor( $dx_editor_content, $dx_editor_id ); ?>
+                <textarea name="<?php echo $dx_editor_id ?>" cols=50 rows=10><?php echo wp_unslash( $dx_editor_content ); ?></textarea>
+                <?php ?>
             </p>
             <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
                 <input type="number" name="<?php echo $dx_margin_field_name?>" value="<?php echo $dx_margin_field_value ?>" min=0 max=20>
