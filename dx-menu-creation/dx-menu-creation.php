@@ -77,7 +77,7 @@ function dx_settings_page() {
     		</p><hr />
     		<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
             <p>
-                <?php  wp_editor( $dx_editor_content, $dx_editor_id ); ?>
+                <?php  wp_editor( wp_unslash( $dx_editor_content ), $dx_editor_id ); ?>
             </p>
             <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
                 <input type="number" name="<?php echo $dx_margin_field_name?>" value="<?php echo $dx_margin_field_value ?>" min=0 max=20>
