@@ -58,21 +58,15 @@ function dx_darksite_notice() {
 			<div class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
-						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/dx_exc_mark.png' ?>" alt="warning">
+						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
 					</div>
 					<div class="darksite-notice-content"><?php echo $dx_content; ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
-				</div>
-			</div>
+				</div><!-- .darksite-notice-container -->
+			</div><!-- .darksite-notice -->
 
 			<style type="text/css">
-				.darksite-notice { position: relative; background: #FFF; color: #333; margin-bottom: 2rem; margin-top: <?php echo $dx_margin_top ?>rem; }
-				.darksite-notice-container { max-width: 1286px; margin: 0 auto; display: flex; padding: 2rem 1rem; }
-				.darksite-notice-image { display: block; margin-right: 2rem; }
-				.darksite-notice-image img { max-width: 90px ; max-height: 100px}
-				.darksite-notice-button { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; padding: 0; background: none; border: none; color: #000; font-size: 1.5rem; position: absolute; top: 0.5rem; right: 1.0rem; cursor: pointer; border-radius: 0.3em; }
-				.darksite-notice-button span { display: block; font-size: 2rem; transform: rotate(45deg); color: #000; }
-				.darksite-notice-active { padding-top: 0; }
+				.darksite-notice { margin-top: <?php echo $dx_margin_top ?>rem; }
 			</style>
 		<?php
 		}
@@ -102,3 +96,15 @@ function dx_set_darksite_cookie() {
 	}
 }
 add_action( 'wp_head', 'dx_set_darksite_cookie' );
+
+
+/**
+ * Enqueue Styles
+ */
+function dx_plugin_scripts() {
+    wp_enqueue_style( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/css/dx-dark-site.css' );
+}
+
+add_action( 'wp_enqueue_scripts', 'dx_plugin_scripts' );
+?>
+
