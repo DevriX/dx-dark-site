@@ -68,11 +68,9 @@
     height: 26px;
 }
 
-.darksite-notice-button:hover {
+.darksite-notice-button:hover,
+.darksite-notice-button:focus{
 	background: none;
-}
-
-.darksite-notice-button:focus {
 	outline: none;
 }
 
