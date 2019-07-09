@@ -1,5 +1,5 @@
 === DevriX Dark Site ===
-Contributors: devrix, koki4a, edocev, smetodiew, metodiew, mmitrev
+Contributors: devrix, koki4a, edocev, metodiew, mmitrev, pgeorgiev, mspatovaliyski
 Tags: redirection, darksite, banner, notice
 Requires at least: 4.4
 Tested up to: 5.2.2
