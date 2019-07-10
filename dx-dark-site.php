@@ -106,5 +106,3 @@ function dx_plugin_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'dx_plugin_scripts' );
-?>
-
