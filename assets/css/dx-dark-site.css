@@ -44,7 +44,7 @@
 .darksite-notice-button {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     padding: 0;
     border: none;
     color: #fff;
