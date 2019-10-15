@@ -63,9 +63,9 @@ function dx_settings_page() {
         $dx_editor_content = $_POST[ $dx_editor_id ];
         $dx_margin_field_value = $_POST[ $dx_margin_field_name ];
 
-        $dx_sanitized_content = $dx_editor_content;
-        $dx_sanitized_url = esc_url( $dx_redirect_value );
-        $dx_sanitized_margin = esc_html( $dx_margin_field_value );
+        $dx_sanitized_content = sanitize_text_field( $dx_editor_content );
+        $dx_sanitized_url = esc_url(  sanitize_text_field( $dx_redirect_value ) );
+        $dx_sanitized_margin = esc_html( absint( $dx_margin_field_value ) );
 
         update_option( $dx_redirect_name, $dx_sanitized_url );
         update_option( $dx_editor_id, $dx_editor_content );
