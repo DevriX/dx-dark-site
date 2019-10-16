@@ -24,13 +24,12 @@ require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 function dx_darksite_redirect() {
 	global $wp;
 	$dx_redirect_to = get_option( 'dx_redirect_to' );
-	$dx_current_url = home_url( add_query_arg( array( $_GET ), $wp->request ) );
-	$dx_sanitized_url = esc_url( $dx_current_url );
-	$dx_url_with_dash = $dx_sanitized_url . '/';
+	$dx_current_url = esc_url( home_url( add_query_arg( array( $_GET ), $wp->request ) ) );
+	$dx_url_with_dash = $dx_current_url . '/';
 
 	// Redirect all visitors, if the option is enabled
 	if( $dx_redirect_to != '' && ! is_user_logged_in() ) {
-		if(  $dx_sanitized_url !== $dx_redirect_to && $dx_url_with_dash !== $dx_redirect_to ) {
+		if(  $dx_current_url !== $dx_redirect_to && $dx_url_with_dash !== $dx_redirect_to ) {
 			wp_redirect( $dx_redirect_to );
 			exit;
 		}
