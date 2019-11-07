@@ -24,7 +24,7 @@ require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 function dx_darksite_redirect() {
 	global $wp;
 	$dx_redirect_to = get_option( 'dx_redirect_to' );
-	$dx_current_url = home_url( add_query_arg( array( $_GET ), $wp->request ) );
+	$dx_current_url = esc_url( home_url( add_query_arg( array( $_GET ), $wp->request ) ) );
 	$dx_url_with_dash = $dx_current_url . '/';
 
 	// Redirect all visitors, if the option is enabled
@@ -44,7 +44,7 @@ add_action( 'template_redirect', 'dx_darksite_redirect' );
  */
 function dx_darksite_notice() {
 	if ( ! empty( get_option( 'dx_my_editor' ) ) ) {
-		if( ! isset( $_COOKIE['dx_darksite_note'] ) ) {
+		if( ! isset( $_COOKIE[ 'dx_darksite_note' ] ) ) {
 			if( ! empty( get_option( 'dx_margin_top' ) ) ) {
 				$dx_margin_top = get_option( 'dx_margin_top' );
 			} else {
@@ -67,7 +67,7 @@ function dx_darksite_notice() {
 			</div><!-- .darksite-notice -->
 
 			<style type="text/css">
-				.darksite-notice { margin-top: <?php echo $dx_margin_top ?>rem; }
+				.darksite-notice { margin-top: <?php echo $dx_margin_top; ?>rem; }
 			</style>
 		<?php
 		}
