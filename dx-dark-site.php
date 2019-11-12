@@ -55,11 +55,17 @@ function dx_darksite_notice() {
 
 			$dx_content = wp_kses_data( $dx_unslashed_content );
 
+			$dx_custom_image = get_option( 'dx-dark-site-image' );
+
 			?>
 			<div class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
-						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
+						<?php if( empty( $dx_custom_image ) ) { ?>
+							<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
+						<?php } else { ?>
+							<img src="<?php echo $dx_custom_image; ?>" alt="warning">
+						<?php } ?>
 					</div>
 					<div class="darksite-notice-content"><?php echo $dx_content; ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
