@@ -4,7 +4,7 @@ Tags: redirection, darksite, banner, notice
 Requires at least: 4.4
 Tested up to: 5.2.2
 Requires PHP: 5.6
-Stable tag: 0.0.1
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,7 @@ The plugin is ownership of DevriX. We are going to work on a few versions, addin
 == Changelog ==
 
 = 1.0.0 =
-* Release date - July 10 2019.
+* Release date - February 18 2020.
 
 == Screenshots ==
 1. The plugin's simple configuration screen. Any existing custom post types will appear here
