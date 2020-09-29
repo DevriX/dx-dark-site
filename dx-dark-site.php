@@ -61,7 +61,7 @@ function dx_darksite_notice() {
 					<div class="darksite-notice-image">
 						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
 					</div>
-					<div class="darksite-notice-content"><?php echo $dx_content; ?></div>
+					<div class="darksite-notice-content"><?php echo apply_filters( 'the_content', $dx_content ); ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div><!-- .darksite-notice-container -->
 			</div><!-- .darksite-notice -->
@@ -107,3 +107,40 @@ function dx_plugin_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'dx_plugin_scripts' );
+
+/**
+ * Counter Shortcode
+ */
+function dx_add_counter_shortcode( $atts ) {
+
+	$attributes = shortcode_atts( array(
+		'seconds' => '5',
+	), $atts );
+
+	return shortocde_handle( $attributes['seconds'] );
+}
+add_shortcode( 'counter', 'dx_add_counter_shortcode' );
+
+
+function shortocde_handle( $atts ) { ?>
+
+	<script type="text/javascript">
+		var timeleft = <?php echo $atts ?>;
+		var downloadTimer = setInterval(function(){
+		  if(timeleft <= 0){
+		    clearInterval(downloadTimer);
+		    document.getElementById("countdown").innerHTML = "Redirecting Now";
+			window.location.href = "https://google.com";
+		    <?php dx_darksite_redirect(); ?>
+		  } else {
+		    document.getElementById("countdown").innerHTML = timeleft + " seconds";
+		  }
+		  timeleft -= 1;
+		}, 1000);
+	</script>
+	<p>You will be redirected in:
+		<b id="countdown"></b>
+	</p>
+
+	<?php
+}
