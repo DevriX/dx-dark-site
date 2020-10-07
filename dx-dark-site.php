@@ -23,6 +23,11 @@ require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
  */
 function dx_darksite_redirect() {
 	global $wp;
+
+	if( has_shortcode( get_option( 'dx_my_editor' ), 'counter' ) ){
+		return;
+	}
+
 	$dx_redirect_to = get_option( 'dx_redirect_to' );
 	$dx_current_url = home_url( add_query_arg( array( $_GET ), $wp->request ) );
 	$dx_url_with_dash = $dx_current_url . '/';
@@ -130,8 +135,7 @@ function shortocde_handle( $atts ) { ?>
 		  if(timeleft <= 0){
 		    clearInterval(downloadTimer);
 		    document.getElementById("countdown").innerHTML = "Redirecting Now";
-			window.location.href = "https://google.com";
-		    <?php dx_darksite_redirect(); ?>
+			window.location.href = "<?php echo get_option( 'dx_redirect_to' ); ?>";
 		  } else {
 		    document.getElementById("countdown").innerHTML = timeleft + " seconds";
 		  }
