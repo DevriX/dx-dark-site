@@ -126,6 +126,18 @@ function dx_add_counter_shortcode( $atts ) {
 }
 add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 
+/**
+ * Global Counter Shortcode
+ */
+function dx_add_global_counter_shortcode( $atts ) {
+
+	$attributes = shortcode_atts( array(
+		'time' => '24:00:00',
+	), $atts );
+
+	return global_counter_shortocde_handle( $attributes['time'] );
+}
+add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
 
 function shortocde_handle( $atts ) { ?>
 
@@ -149,4 +161,8 @@ function shortocde_handle( $atts ) { ?>
 	<?php } else {
 		echo "Countdown placeholder. You shouldn't be logged in in order to see the counter.";
 	}
+}
+
+function global_counter_shortocde_handle() {
+	echo "Placeholder";
 }
