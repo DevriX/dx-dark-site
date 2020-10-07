@@ -129,22 +129,24 @@ add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 
 function shortocde_handle( $atts ) { ?>
 
-	<script type="text/javascript">
-		var timeleft = <?php echo $atts ?>;
-		var downloadTimer = setInterval(function(){
-		  if(timeleft <= 0){
-		    clearInterval(downloadTimer);
-		    document.getElementById("countdown").innerHTML = "Redirecting Now";
-			window.location.href = "<?php echo get_option( 'dx_redirect_to' ); ?>";
-		  } else {
-		    document.getElementById("countdown").innerHTML = timeleft + " seconds";
-		  }
-		  timeleft -= 1;
-		}, 1000);
-	</script>
-	<p>You will be redirected in:
-		<b id="countdown"></b>
-	</p>
-
-	<?php
+	<?php if( ! is_user_logged_in() ) { ?>
+		<script type="text/javascript">
+			var timeleft = <?php echo $atts ?>;
+			var downloadTimer = setInterval(function(){
+			  if(timeleft <= 0){
+			    clearInterval(downloadTimer);
+			    document.getElementById("countdown").innerHTML = "Redirecting Now";
+				window.location.href = "<?php echo get_option( 'dx_redirect_to' ); ?>";
+			  } else {
+			    document.getElementById("countdown").innerHTML = timeleft + " seconds";
+			  }
+			  timeleft -= 1;
+			}, 1000);
+		</script>
+		<p>You will be redirected in:
+			<b id="countdown"></b>
+		</p>
+	<?php } else {
+		echo "Countdown placeholder. You shouldn't be logged in in order to see the counter.";
+	}
 }
