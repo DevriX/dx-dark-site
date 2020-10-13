@@ -12,7 +12,7 @@
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 define( 'DX_DARKSITE_PATH', plugin_dir_path( __FILE__ ) );
-define( 'DX_STYLES_VERSION', '15102019' );
+define( 'DX_STYLES_VERSION', '20201013' );
 
 require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 
@@ -24,7 +24,9 @@ require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 function dx_darksite_redirect() {
 	global $wp;
 
-	if( has_shortcode( get_option( 'dx_my_editor' ), 'counter' ) ){
+	$page_id = get_the_ID();
+
+	if( has_shortcode( get_option( 'dx_my_editor' ), 'counter' ) || has_shortcode( get_post_field('post_content', $page_id), 'counter' )){
 		return;
 	}
 
@@ -132,7 +134,7 @@ add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 function dx_add_global_counter_shortcode( $atts ) {
 
 	$attributes = shortcode_atts( array(
-		'time' => '24:00:00',
+		'time' => 'January 1 2022 10:10:10',
 	), $atts );
 
 	return global_counter_shortocde_handle( $attributes['time'] );
@@ -155,14 +157,35 @@ function shortocde_handle( $atts ) { ?>
 			  timeleft -= 1;
 			}, 1000);
 		</script>
-		<p>You will be redirected in:
-			<b id="countdown"></b>
-		</p>
-	<?php } else {
-		echo "Countdown placeholder. You shouldn't be logged in in order to see the counter.";
+		<?php
+	 	return '<b id="countdown"></b>';
+	} else {
+		return "Countdown placeholder. You shouldn't be logged in in order to see the counter.";
 	}
 }
 
-function global_counter_shortocde_handle() {
-	echo "Placeholder";
+function global_counter_shortocde_handle( $atts ) {
+	?>
+	<script>
+	var countDownDate = new Date("<?php echo $atts; ?>").getTime();
+
+	var x = setInterval(function() {
+
+	  var now = new Date().getTime();
+	  var distance = countDownDate - now;
+
+	  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	  document.getElementById("counter").innerHTML = days + "d " + hours + "h "
+	  + minutes + "m " + seconds + "s ";
+	  if (distance < 0) {
+	    clearInterval(x);
+	    document.getElementById("demo").innerHTML = "EXPIRED";
+	  }
+	}, 1000);
+	</script>
+<?php return '<b id="counter"></b>';
 }
