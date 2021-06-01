@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: DevriX Dark Site
+ * Plugin Name: DX Dark Site
  * Description: Plugin for emergency redirections and notices
- * Version:		1.0.0
+ * Version:		1.0.1
  * Author:      DevriX
  * Author URI:  https://devrix.com/
  * License:     GPLv2 or later
@@ -24,7 +24,7 @@ require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 function dx_darksite_redirect() {
 	global $wp;
 	$dx_redirect_to = get_option( 'dx_redirect_to' );
-	$dx_current_url = home_url( add_query_arg( array( $_GET ), $wp->request ) );
+	$dx_current_url = esc_url( home_url( add_query_arg( array( $_GET ), $wp->request ) ) );
 	$dx_url_with_dash = $dx_current_url . '/';
 
 	// Redirect all visitors, if the option is enabled
@@ -44,7 +44,7 @@ add_action( 'template_redirect', 'dx_darksite_redirect' );
  */
 function dx_darksite_notice() {
 	if ( ! empty( get_option( 'dx_my_editor' ) ) ) {
-		if( ! isset( $_COOKIE['dx_darksite_note'] ) ) {
+		if( ! isset( $_COOKIE[ 'dx_darksite_note' ] ) ) {
 			if( ! empty( get_option( 'dx_margin_top' ) ) ) {
 				$dx_margin_top = get_option( 'dx_margin_top' );
 			} else {
@@ -55,11 +55,17 @@ function dx_darksite_notice() {
 
 			$dx_content = wp_kses_data( $dx_unslashed_content );
 
+			$dx_custom_image = get_option( 'dx-dark-site-image' );
+
 			?>
 			<div class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
-						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
+						<?php if( empty( $dx_custom_image ) ) { ?>
+							<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
+						<?php } else { ?>
+							<img src="<?php echo $dx_custom_image; ?>" alt="warning">
+						<?php } ?>
 					</div>
 					<div class="darksite-notice-content"><?php echo $dx_content; ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
@@ -67,7 +73,7 @@ function dx_darksite_notice() {
 			</div><!-- .darksite-notice -->
 
 			<style type="text/css">
-				.darksite-notice { margin-top: <?php echo $dx_margin_top ?>rem; }
+				.darksite-notice { margin-top: <?php echo $dx_margin_top; ?>rem; }
 			</style>
 		<?php
 		}
