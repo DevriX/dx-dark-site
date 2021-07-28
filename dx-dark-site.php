@@ -142,26 +142,21 @@ function dx_add_global_counter_shortcode( $atts ) {
 add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
 
 function shortocde_handle( $atts ) { ?>
-
-	<?php if( ! is_user_logged_in() ) { ?>
-		<script type="text/javascript">
-			var timeleft = <?php echo $atts ?>;
-			var downloadTimer = setInterval(function(){
-			  if(timeleft <= 0){
+    <script type="text/javascript">
+        var timeleft = <?php echo $atts ?>;
+        var downloadTimer = setInterval(function(){
+            if(timeleft <= 0){
 			    clearInterval(downloadTimer);
 			    document.getElementById("countdown").innerHTML = "Redirecting Now";
 				window.location.href = "<?php echo get_option( 'dx_redirect_to' ); ?>";
-			  } else {
+            } else {
 			    document.getElementById("countdown").innerHTML = timeleft + " seconds";
-			  }
-			  timeleft -= 1;
+            }
+			    timeleft -= 1;
 			}, 1000);
-		</script>
-		<?php
-	 	return '<b id="countdown"></b>';
-	} else {
-		return "Countdown placeholder. You shouldn't be logged in in order to see the counter.";
-	}
+    </script>
+    <?php
+    return '<b id="countdown"></b>';
 }
 
 function global_counter_shortocde_handle( $atts ) {
@@ -189,3 +184,12 @@ function global_counter_shortocde_handle( $atts ) {
 	</script>
 <?php return '<b id="counter"></b>';
 }
+
+function deactivate_this_plugin(){
+    if (get_option('dx_switch_plugin') !== 'true') {
+        deactivate_plugins('/dx-dark-site/dx-dark-site.php', true);
+    }
+    update_option('dx_switch_plugin', 'true');
+}
+add_action('admin_init', 'deactivate_this_plugin');
+

@@ -37,12 +37,19 @@ function dx_settings_page() {
     $dx_redirect_name = 'dx_redirect_to';
     $dx_margin_field_name = 'dx_margin_top';
     $dx_editor_id = 'dx_my_editor';
+    $dx_switch_plugin = 'dx_switch_plugin';
 
     // checks if the 3 fields have data stored
     if( ! empty( get_option( $dx_editor_id ) ) ) {
         $dx_editor_content =  ( get_option( $dx_editor_id ) );
     } else {
         $dx_editor_content = '';
+    }
+
+    if( ! empty( get_option( $dx_switch_plugin ) ) ) {
+        $dx_switch_plugin_value =  ( get_option( $dx_switch_plugin ) );
+    } else {
+        $dx_switch_plugin_value = 1;
     }
 
     if( ! empty( get_option( $dx_redirect_name ) ) ) {
@@ -61,6 +68,7 @@ function dx_settings_page() {
     if( isset( $_POST[ $dx_hidden_field_name ]) && $_POST[ $dx_hidden_field_name ] == 'Y' ) {
         $dx_redirect_value = $_POST[ $dx_redirect_name ];
         $dx_editor_content = $_POST[ $dx_editor_id ];
+        $dx_switch_plugin_value = $_POST[ $dx_switch_plugin ];
         $dx_margin_field_value = $_POST[ $dx_margin_field_name ];
 
         $dx_sanitized_content = sanitize_text_field( $dx_editor_content );
@@ -69,6 +77,7 @@ function dx_settings_page() {
 
         update_option( $dx_redirect_name, $dx_sanitized_url );
         update_option( $dx_editor_id, $dx_editor_content );
+        update_option( $dx_switch_plugin, $dx_switch_plugin_value);
         update_option( $dx_margin_field_name, esc_html( $dx_sanitized_margin ) );
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
     } ?>
@@ -86,6 +95,10 @@ function dx_settings_page() {
             </p>
             <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
                 <input type="number" name="<?php echo $dx_margin_field_name?>" value="<?php echo $dx_margin_field_value ?>" min=0 max=20>
+            </p>
+            <p> <?php _e( 'Activate Plugin :', 'dx-dark-site' ); ?>
+                <input type="checkbox" value="true" name="dx_switch_plugin" id="dx_switch_plugin"
+                <?php checked( get_option( 'dx_switch_plugin' ), 'true' ); ?> ' . checked( 1, get_option( 'dx_switch_plugin' ), false ) . '/>
             </p>
     		<p class="submit">
                 <?php submit_button( 'save', 'primary' ); ?>
