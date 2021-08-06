@@ -1,0 +1,48 @@
+@import 'https://fonts.googleapis.com/css?family=Bangers';
+
+/************ Timer Styles *************/
+
+div#clockdiv {
+    text-align: center;
+    font-family: Bangers;
+    color: green;
+    font-size: 30px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+
+div#clockdiv:before {
+    content: "Remaining time...";
+    width: 100%;
+    margin-bottom: 21px;
+}
+
+.countdown-wrap {
+    width: 100%;
+}
+
+div#clockdiv &gt; div {
+                      font-size: 80px;
+                      width: 25%;
+                      color: #ff0051;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      align-items: center;
+                  }
+
+.days, .hours, .minutes, .seconds {
+    margin-bottom:20px;
+}
+
+span.time-label {
+    font-size: 40px;
+    color: #ff0051;
+}

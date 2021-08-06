@@ -109,7 +109,92 @@ add_action( 'wp_head', 'dx_set_darksite_cookie' );
  * Enqueue Styles
  */
 function dx_plugin_scripts() {
-    wp_enqueue_style( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/css/dx-dark-site.css', '', DX_STYLES_VERSION );
-}
+    wp_enqueue_style( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/css/countdown.css', '', DX_STYLES_VERSION );
 
+}
 add_action( 'wp_enqueue_scripts', 'dx_plugin_scripts' );
+
+
+function dx_add_shortcode( $atts ) {
+
+    $attributes = shortcode_atts( array(
+        'deadline' => 'January 1 2022 10:10:10',
+    ), $atts );
+
+    return shortocde_handle( $attributes['deadline'] );
+}
+add_shortcode( 'global-counter', 'dx_add_shortcode' );
+?>
+
+
+    <div class="countdown-wrap">
+        <div id="clockdiv">
+            <div>
+                <span class="days"></span>
+                <span class="time-label">DAYS</span>
+            </div>
+            <div>
+                <span class="hours"></span>
+                <span class="time-label">HOURS</span>
+            </div>
+            <div>
+                <span class="minutes"></span>
+                <span class="time-label">MINUTES</span>
+            </div>
+            <div>
+                <span class="seconds"></span>
+                <span class="time-label">SECS</span>
+            </div>
+        </div>
+    </div>
+
+
+<?php
+function shortocde_handle( $atts ) {
+    ?>
+    <script>
+        var deadline = 'March 2 2022 12:41:39';
+
+        function getTimeRemaining(endtime){
+            var t = Date.parse(endtime) - Date.parse(new Date());
+            console.log(t);
+            var seconds = Math.floor( (t/1000) % 60 );
+            var minutes = Math.floor( (t/1000/60) % 60 );
+            var hours = Math.floor( (t/(1000*60*60)) % 24 );
+            var days = Math.floor( t/(1000*60*60*24) );
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            };
+        }
+
+        function initializeClock(id, endtime){
+            var clock = document.getElementById(id);
+            function updateClock(){
+                var t = getTimeRemaining(endtime);
+                var daysSpan = clock.querySelector('.days');
+                var hoursSpan = clock.querySelector('.hours');
+                var minutesSpan = clock.querySelector('.minutes');
+                var secondsSpan = clock.querySelector('.seconds');
+                daysSpan.innerHTML = t.days;
+                hoursSpan.innerHTML = t.hours;
+                minutesSpan.innerHTML = t.minutes;
+                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+                if(t.total<=0){
+                    // Redirect if the Countdown is Over
+                    window.location.href="https://www.google.com";
+                }
+
+            }
+
+            updateClock(); // run function once at first to avoid delay
+            var timeinterval = setInterval(updateClock,1000);
+        }
+
+        initializeClock('clockdiv', deadline);
+    </script>
+    <?php return '<b id="counter"></b>';
+}
