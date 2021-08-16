@@ -15,6 +15,7 @@ define( 'DX_DARKSITE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'DX_STYLES_VERSION', '15102019' );
 
 require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
+include plugin_dir_path( __FILE__ ) . './dx-metaboxes.php';
 
 /**
  *
@@ -22,18 +23,18 @@ require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
  *
  */
 function dx_darksite_redirect() {
-	global $wp;
-	$dx_redirect_to = get_option( 'dx_redirect_to' );
-	$dx_current_url = esc_url( home_url( add_query_arg( array( $_GET ), $wp->request ) ) );
-	$dx_url_with_dash = $dx_current_url . '/';
+    global $wp;
+    $dx_redirect_to = get_option( 'dx_redirect_to' );
+    $dx_current_url = esc_url( home_url( add_query_arg( array( $_GET ), $wp->request ) ) );
+    $dx_url_with_dash = $dx_current_url . '/';
 
-	// Redirect all visitors, if the option is enabled
-	if( $dx_redirect_to != '' && ! is_user_logged_in() ) {
-		if(  $dx_current_url !== $dx_redirect_to && $dx_url_with_dash !== $dx_redirect_to ) {
-			wp_redirect( $dx_redirect_to );
-			exit;
-		}
-	}
+    // Redirect all visitors, if the option is enabled
+    if( $dx_redirect_to != '' && ! is_user_logged_in() ) {
+        if(  $dx_current_url !== $dx_redirect_to && $dx_url_with_dash !== $dx_redirect_to ) {
+            wp_redirect( $dx_redirect_to );
+            exit;
+        }
+    }
 }
 add_action( 'template_redirect', 'dx_darksite_redirect' );
 
@@ -43,41 +44,41 @@ add_action( 'template_redirect', 'dx_darksite_redirect' );
  *
  */
 function dx_darksite_notice() {
-	if ( ! empty( get_option( 'dx_my_editor' ) ) ) {
-		if( ! isset( $_COOKIE[ 'dx_darksite_note' ] ) ) {
-			if( ! empty( get_option( 'dx_margin_top' ) ) ) {
-				$dx_margin_top = get_option( 'dx_margin_top' );
-			} else {
-				$dx_margin_top = 0;
-			}
-			$dx_editor_content = get_option( 'dx_my_editor' );
-			$dx_unslashed_content = wp_unslash( $dx_editor_content );
+    if ( ! empty( get_option( 'dx_my_editor' ) ) ) {
+        if( ! isset( $_COOKIE[ 'dx_darksite_note' ] ) ) {
+            if( ! empty( get_option( 'dx_margin_top' ) ) ) {
+                $dx_margin_top = get_option( 'dx_margin_top' );
+            } else {
+                $dx_margin_top = 0;
+            }
+            $dx_editor_content = get_option( 'dx_my_editor' );
+            $dx_unslashed_content = wp_unslash( $dx_editor_content );
 
-			$dx_content = wp_kses_data( $dx_unslashed_content );
+            $dx_content = wp_kses_data( $dx_unslashed_content );
 
-			$dx_custom_image = get_option( 'dx-dark-site-image' );
+            $dx_custom_image = get_option( 'dx-dark-site-image' );
 
-			?>
-			<div class="darksite-notice">
-				<div class="darksite-notice-container">
-					<div class="darksite-notice-image">
-						<?php if( empty( $dx_custom_image ) ) { ?>
-							<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
-						<?php } else { ?>
-							<img src="<?php echo $dx_custom_image; ?>" alt="warning">
-						<?php } ?>
-					</div>
-					<div class="darksite-notice-content"><?php echo $dx_content; ?></div>
-					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
-				</div><!-- .darksite-notice-container -->
-			</div><!-- .darksite-notice -->
+            ?>
+            <div class="darksite-notice">
+                <div class="darksite-notice-container">
+                    <div class="darksite-notice-image">
+                        <?php if( empty( $dx_custom_image ) ) { ?>
+                            <img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
+                        <?php } else { ?>
+                            <img src="<?php echo $dx_custom_image; ?>" alt="warning">
+                        <?php } ?>
+                    </div>
+                    <div class="darksite-notice-content"><?php echo $dx_content; ?></div>
+                    <button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
+                </div><!-- .darksite-notice-container -->
+            </div><!-- .darksite-notice -->
 
-			<style type="text/css">
-				.darksite-notice { margin-top: <?php echo $dx_margin_top; ?>rem; }
-			</style>
-		<?php
-		}
-	}
+            <style type="text/css">
+                .darksite-notice { margin-top: <?php echo $dx_margin_top; ?>rem; }
+            </style>
+            <?php
+        }
+    }
 }
 add_action( 'wp_head', 'dx_darksite_notice' );
 
@@ -87,20 +88,20 @@ add_action( 'wp_head', 'dx_darksite_notice' );
  *
  */
 function dx_set_darksite_cookie() {
-	if( ! empty( get_option( 'dx_my_editor' ) ) ) { ?>
-		<script>
-			jQuery(function($){
-				let $notice = $( '.darksite-notice' );
-			});
-			function SetDarksiteCookie() {
-				days=0.5; // number of days to keep the cookie
-				currentDate = new Date();
-				currentDate.setTime( currentDate.getTime() + ( days*24*60*60*1000 ) );
-				document.cookie = 'dx_darksite_note=closed; expires=' + currentDate.toGMTString();
-				jQuery( '.darksite-notice' ).hide();
-			}
-		</script> <?php
-	}
+    if( ! empty( get_option( 'dx_my_editor' ) ) ) { ?>
+        <script>
+            jQuery(function($){
+                let $notice = $( '.darksite-notice' );
+            });
+            function SetDarksiteCookie() {
+                days=0.5; // number of days to keep the cookie
+                currentDate = new Date();
+                currentDate.setTime( currentDate.getTime() + ( days*24*60*60*1000 ) );
+                document.cookie = 'dx_darksite_note=closed; expires=' + currentDate.toGMTString();
+                jQuery( '.darksite-notice' ).hide();
+            }
+        </script> <?php
+    }
 }
 add_action( 'wp_head', 'dx_set_darksite_cookie' );
 
@@ -109,92 +110,7 @@ add_action( 'wp_head', 'dx_set_darksite_cookie' );
  * Enqueue Styles
  */
 function dx_plugin_scripts() {
-    wp_enqueue_style( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/css/countdown.css', '', DX_STYLES_VERSION );
-
+    wp_enqueue_style( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/css/dx-dark-site.css', '', DX_STYLES_VERSION );
 }
+
 add_action( 'wp_enqueue_scripts', 'dx_plugin_scripts' );
-
-
-function dx_add_shortcode( $atts ) {
-
-    $attributes = shortcode_atts( array(
-        'deadline' => 'January 1 2022 10:10:10',
-    ), $atts );
-
-    return shortocde_handle( $attributes['deadline'] );
-}
-add_shortcode( 'global-counter', 'dx_add_shortcode' );
-?>
-
-
-    <div class="countdown-wrap">
-        <div id="clockdiv">
-            <div>
-                <span class="days"></span>
-                <span class="time-label">DAYS</span>
-            </div>
-            <div>
-                <span class="hours"></span>
-                <span class="time-label">HOURS</span>
-            </div>
-            <div>
-                <span class="minutes"></span>
-                <span class="time-label">MINUTES</span>
-            </div>
-            <div>
-                <span class="seconds"></span>
-                <span class="time-label">SECS</span>
-            </div>
-        </div>
-    </div>
-
-
-<?php
-function shortocde_handle( $atts ) {
-    ?>
-    <script>
-        var deadline = 'March 2 2022 12:41:39';
-
-        function getTimeRemaining(endtime){
-            var t = Date.parse(endtime) - Date.parse(new Date());
-            console.log(t);
-            var seconds = Math.floor( (t/1000) % 60 );
-            var minutes = Math.floor( (t/1000/60) % 60 );
-            var hours = Math.floor( (t/(1000*60*60)) % 24 );
-            var days = Math.floor( t/(1000*60*60*24) );
-            return {
-                'total': t,
-                'days': days,
-                'hours': hours,
-                'minutes': minutes,
-                'seconds': seconds
-            };
-        }
-
-        function initializeClock(id, endtime){
-            var clock = document.getElementById(id);
-            function updateClock(){
-                var t = getTimeRemaining(endtime);
-                var daysSpan = clock.querySelector('.days');
-                var hoursSpan = clock.querySelector('.hours');
-                var minutesSpan = clock.querySelector('.minutes');
-                var secondsSpan = clock.querySelector('.seconds');
-                daysSpan.innerHTML = t.days;
-                hoursSpan.innerHTML = t.hours;
-                minutesSpan.innerHTML = t.minutes;
-                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-                if(t.total<=0){
-                    // Redirect if the Countdown is Over
-                    window.location.href="https://www.google.com";
-                }
-
-            }
-
-            updateClock(); // run function once at first to avoid delay
-            var timeinterval = setInterval(updateClock,1000);
-        }
-
-        initializeClock('clockdiv', deadline);
-    </script>
-    <?php return '<b id="counter"></b>';
-}
