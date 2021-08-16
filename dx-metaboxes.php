@@ -22,7 +22,7 @@ function date_meta_html( $post ) {
     $date = get_post_meta( $post->ID, '_date_meta', true );
     ?>
     <label for="date_text">Date:</label>
-    <input name="date_text" id="date_text" type="text" value="<?php echo esc_html( $date ); ?>" placeholder="YYYY/MM/DD">
+    <input name="date_text" id="date_text" type="text" value="<?php echo esc_html( $date ); ?>">
     </input>
     <?php
 }
@@ -40,3 +40,4 @@ function save_data_meta_boxes( $post_id ) {
     }
 }
 add_action( 'save_post', 'save_data_meta_boxes' );
+
