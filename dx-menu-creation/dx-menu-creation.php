@@ -118,7 +118,7 @@ function dx_settings_page() {
 
         update_option( $dx_redirect_name, $dx_redirect_value );
         update_option( $dx_editor_id, $dx_editor_content );
-        update_option( $dx_margin_field_name, esc_html( $dx_sanitized_margin ) );
+        update_option( $dx_margin_field_name, esc_html( $dx_margin_field_value ) );
 
         if( isset( $_POST['image_url'] ) ) {
             $image_url = $_POST['image_url'];
@@ -145,7 +145,7 @@ function dx_settings_page() {
                 <?php dx_get_uploader(); ?>
             </p>
     		<p class="submit">
-                <?php submit_button( 'save', 'primary' ); ?>
+                <?php submit_button( 'SAVE', 'primary' ); ?>
     		</p>
     	</form>
     </div>
