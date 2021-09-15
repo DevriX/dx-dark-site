@@ -111,7 +111,7 @@ function dx_settings_page() {
     // saves data from the 3 input fields in wp_options table
     if( isset( $_POST[ $dx_hidden_field_name ] ) && $_POST[ $dx_hidden_field_name ] == 'Y' ) {
         $dx_redirect_value     = esc_url( $_POST[ $dx_redirect_name ] );
-        $dx_editor_content     = sanitize_text_field( $_POST[ $dx_editor_id ] );
+        $dx_editor_content     = wp_kses_data( $_POST[ $dx_editor_id ] );
         $dx_margin_field_value = esc_html ( $_POST[ $dx_margin_field_name ] );
 
         $dx_sanitized_content = sanitize_text_field( $dx_editor_content );
