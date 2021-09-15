@@ -245,37 +245,38 @@ class PageTemplater {
 } 
 add_action( 'plugins_loaded', array( 'PageTemplater', 'get_instance' ) );
 
+function dx_dark_add_countdown() {
+
+	wp_enqueue_script( 'dx-dark-countdown.js', plugin_dir_url( __FILE__ ) . '/dx-dark-countdown.js', array( 'jquery' ), DX_STYLES_VERSION, false);
+
+	wp_localize_script( 'dx-dark-countdown.js', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+}
+
+add_action( 'wp_ajax_dx_dark_countdown_handle', 'dx_dark_countdown_handle' );
+
+add_action( 'wp_enqueue_scripts', 'dx_dark_add_countdown' );
+
+function dx_dark_countdown_handle() {
+	$timer_countdown_value = get_option( 'dx-dark-countdown-timer' );
+
+	if ( isset( $timer_countdown_value ) && ! empty ( $timer_countdown_value ) ) {
+		$date = date('F j, Y, H:i:s', $timer_countdown_value);
+		wp_send_json_success( $date);
+	}
+}
+
 /*** Countdown Timer Shortcode ***/
-function next_event_shortcodes_init() {
-	add_shortcode('next_event', 'next_event_shortcode');
+function dx_next_event_shortcodes_init() {
+	add_shortcode('dx_next_event', 'dx_next_event_shortcode');
   }
-  add_action('init', 'next_event_shortcodes_init');
+  add_action('init', 'dx_next_event_shortcodes_init');
   
-  function next_event_shortcode ($atts = [])
+  function dx_next_event_shortcode ($atts = [], $content = null)
   {
-	// normalize attribute keys to lowercase
 	$atts = array_change_key_case((array)$atts, CASE_LOWER);
 	if (!array_key_exists("date", $atts)) return false;
   
-	$time_remaining = strtotime($atts['date']) - time();
-  
-	if ($time_remaining < 0) {
-	  $time_remaining = 0;
-	}
-  
-	$total_days_remaining = ceil($time_remaining / (60 * 60 * 24));
-  
-	if ($total_days_remaining >= 7) {
-	  $weeks_remaining = sprintf("%02d", floor($total_days_remaining / 7));
-	  $days_remaining = sprintf("%02d", $total_days_remaining % 7);
-	} else {
-	  $weeks_remaining = sprintf("%02d", 0);
-	  $days_remaining = sprintf("%02d", $total_days_remaining);
-
-	}
+	$date = strtotime($atts['date']);
+	update_option('dx-dark-countdown-timer', $date);
 	
-	echo "
-	<div class='next-event'>
-	  $weeks_remaining Weeks, $days_remaining Days
-	</div>";
   }
