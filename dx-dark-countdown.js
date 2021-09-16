@@ -11,7 +11,7 @@ jQuery( document ).ready(function() {
             url: ajax_object.ajax_url,
             data: data,
             success: function (response) {
-                console.log(response.data)
+               
 // Set the date we're counting down to
 countDownDate = new Date(response.data).getTime();
 
@@ -43,14 +43,12 @@ var x = setInterval(function() {
 
             },
             error: function (response) {
-                console.log(response)
             }
         })
 
     }
 });
 
-console.log('hello')
 // Set the date we're counting down to
 countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 
