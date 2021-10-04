@@ -1,6 +1,6 @@
 <?php
 /**
-* Template Name: Countdown Page
+* Template Name: DX-Dark Site: Countdown Page
 *
 */
 

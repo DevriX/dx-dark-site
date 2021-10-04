@@ -58,6 +58,11 @@ function dx_darksite_notice() {
 
 			$dx_custom_image = get_option( 'dx-dark-site-image' );
 
+			global $template; 
+			$current_template = basename( $template );
+			if ( $current_template === 'page-countdown.php') {
+				return;
+			} else {
 			?>
 			<div class="darksite-notice">
 				<div class="darksite-notice-container">
@@ -77,6 +82,7 @@ function dx_darksite_notice() {
 				.darksite-notice { margin-top: <?php echo $dx_margin_top; ?>rem; }
 			</style>
 		<?php
+			}
 		}
 	}
 }
