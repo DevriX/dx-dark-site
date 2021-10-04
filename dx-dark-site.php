@@ -137,8 +137,12 @@ function dx_dark_countdown_handle() {
 	$timer_countdown_value = get_option( 'dx-dark-countdown-timer' );
 
 	if ( isset( $timer_countdown_value ) && ! empty ( $timer_countdown_value ) ) {
-		$date = date('F j, Y, H:i:s', $timer_countdown_value);
-		wp_send_json_success( $date);
+		$date = date( 'F j, Y, H:i:s', $timer_countdown_value );
+		wp_send_json_success( $date );
+	} else {
+		$now = new DateTime();
+		$date = $now->format( 'F j, Y, H:i:s' );
+		wp_send_json_success( $date );
 	}
 }
 
