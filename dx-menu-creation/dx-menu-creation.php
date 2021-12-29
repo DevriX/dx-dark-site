@@ -8,13 +8,20 @@
 
 /**
  *
- * Adds sub-menu admin page to Settings->Dark Site
+ * Adds menu admin page to DX Dark Site
  *
  */
 function dx_add_menu_page() {
-    add_options_page( __( 'Dark Site','dx-dark-site' ), __( 'Dark Site','dx-dark-site' ), 'manage_options', 'dx-darksite-settings', 'dx_settings_page' );
+    add_menu_page( __( 'DX Dark Site', 'dx-dark-site' ), __( 'DX Dark Site', 'dx-dark-site' ), 'manage_options', 'dx-darksite-settings', 'dx_settings_page' );
+
+	add_submenu_page( 'dx-darksite-settings', __( 'Help Page', 'dx-dark-site-help' ), __( 'Help Page', 'dx-dark-site-help' ), 'manage_options', 'dx-darksite-help', 'dx_darksite_help_call' );
+
 }
 add_action( 'admin_menu', 'dx_add_menu_page' );
+
+function dx_darksite_help_call() {
+	include( 'dx-dark-site-help-page.php' );
+}
 
 /**
  *
@@ -64,6 +71,7 @@ function dx_get_uploader() {
 // UPLOAD ENGINE
 function load_wp_media_files() {
     wp_enqueue_media();
+
 }
 add_action( 'admin_enqueue_scripts', 'load_wp_media_files' );
 
