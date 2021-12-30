@@ -73,7 +73,11 @@ function dx_darksite_notice() {
 			$dx_time_kses = wp_kses_data( $dx_unslashed_time );
 			$dx_date_time = $dx_date_kses . ' ' . $dx_time_kses;
 			$dx_content = wp_kses_data( $dx_unslashed_content ) . ' [global-counter time="' . $dx_date_time . '"]';
+
+			$expiry_date  = strtotime( $dx_date_time );
++			$current_date = strtotime( gmdate( 'Y-m-d h:i:s' ) );
 			?>
+			<?php if ( $expiry_date >= $current_date ) : ?>
 			<div class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
@@ -83,6 +87,7 @@ function dx_darksite_notice() {
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div><!-- .darksite-notice-container -->
 			</div><!-- .darksite-notice -->
+			<?php endif; ?>
 
 			<style type="text/css">
 				.darksite-notice { margin-top: <?php echo $dx_margin_top ?>rem; }
