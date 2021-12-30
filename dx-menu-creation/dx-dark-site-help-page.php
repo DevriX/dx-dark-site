@@ -69,12 +69,12 @@
 			
 				<p>
 					The unique code for your form is available in the <strong>All Offer Calc</strong> listing:
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>/screenshot-2.png" alt="all offer calc shortcodes" />
+					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>images/screenshot-2.png" alt="all offer calc shortcodes" />
 				</p>
 				
 				<p>
 					or in <strong>Single Offer</strong> view:<br/>
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>/screenshot-1.png" alt="single offer calc shortcodes" />
+					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>images/screenshot-1.png" alt="single offer calc shortcodes" />
 				</p>
 				
 
