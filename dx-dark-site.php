@@ -51,13 +51,33 @@ function dx_darksite_notice() {
 				$dx_margin_top = 0;
 			}
 			$dx_editor_content = get_option( 'dx_my_editor' );
+			$dx_date = get_option( 'dx_date' );
+			$dx_time = get_option( 'dx_time' );
+
 			$dx_unslashed_content = wp_unslash( $dx_editor_content );
+			$dx_unslashed_date = wp_unslash( $dx_date );
+			$dx_unslashed_time = wp_unslash( $dx_time );
 
 			$dx_content = wp_kses_data( $dx_unslashed_content );
+			$dx_date_kses = wp_kses_data( $dx_unslashed_date );
+			$dx_time_kses = wp_kses_data( $dx_unslashed_time );
+			$dx_date_time = $dx_date_kses . ' ' . $dx_time_kses;
 
 			$dx_custom_image = get_option( 'dx-dark-site-image' );
 
+			$expiry_date  = strtotime( $dx_date_time );
+			$current_date = strtotime( gmdate( 'Y-m-d h:i:s' ) );
+
+			$diff    = abs( $expiry_date - $current_date );
+			$years   = floor( $diff / ( 365 * 60 * 60 * 24 ) );
+			$months  = floor( ( $diff - $years * 365 * 60 * 60 * 24 ) / ( 30 * 60 * 60 * 24 ) );
+			$days    = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 ) / ( 60 * 60 * 24 ) );
+			$hours   = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 ) / ( 60 * 60 ) );
+			$minutes = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 ) / 60 );
+			$seconds = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 - $minutes * 60 ) );
+
 			?>
+			<?php if ( $expiry_date >= $current_date ) : ?>
 			<div class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
@@ -67,10 +87,12 @@ function dx_darksite_notice() {
 							<img src="<?php echo $dx_custom_image; ?>" alt="warning">
 						<?php } ?>
 					</div>
-					<div class="darksite-notice-content"><?php echo $dx_content; ?></div>
+					<div class="darksite-notice-content"><?php echo apply_filters( 'the_content', $dx_content ); ?> <b><?php echo $years . ' years ' . $months . ' months '
+					. $days . ' days ' . $hours . ' hours ' . $minutes . ' minutes ' . $seconds . ' seconds'; ?></b></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div><!-- .darksite-notice-container -->
 			</div><!-- .darksite-notice -->
+			<?php endif; ?>
 
 			<style type="text/css">
 				.darksite-notice { margin-top: <?php echo $dx_margin_top; ?>rem; }
