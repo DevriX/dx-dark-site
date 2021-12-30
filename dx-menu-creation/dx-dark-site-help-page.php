@@ -1,6 +1,6 @@
 <div class="dx-help-page">
 	<header class="help-header">
-		<h2 class="logo"><img src="<?php echo plugin_dir_url( __FILE__ ) . 'devrix-logo-white.svg'; ?>" alt="" /></h2><!-- .logo -->
+		<h2 class="logo"><img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/devrix-logo-white.svg'; ?>" alt="" /></h2><!-- .logo -->
 		<div class="page-info">
 			<h3 class="page-title">Documentation</h3><!-- .page-title -->
 			<h4 class="page-subtitle">DX Delete Attached Media</h4><!-- .page-subtitlr -->
@@ -112,7 +112,7 @@
 					<footer class='dx-footer'>
 						<div class="signup-banner">
 							<a href="http://devrix.com/shop/subscribe/" target="_blank">
-								<img class='footer-banner' src="<?php echo plugin_dir_url( __FILE__ ). 'dx-help-banner.png'; ?>" alt="WordPress help">
+								<img class='footer-banner' src="<?php echo plugin_dir_url( __FILE__ ). '../assets/images/dx-help-banner.png'; ?>" alt="WordPress help">
 							</a>
 						</div>
 					</footer>
