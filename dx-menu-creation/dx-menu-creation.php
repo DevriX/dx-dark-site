@@ -87,7 +87,7 @@ function dx_settings_page() {
     		<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
     		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site' ); ?></h3>
     		<p><?php _e("Redirect to:", 'dx-dark-site' ); ?>
-    			<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
+    			<input type="text" required name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
     		</p><hr />
     		<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
             <p>
