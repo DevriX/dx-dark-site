@@ -191,7 +191,7 @@ function global_counter_shortocde_handle( $atts ) {
 	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 	  document.getElementById("counter").innerHTML = days + " days " + hours + " hours "
-	  + minutes + " months " + seconds + " seconds";
+	  + minutes + " minutes " + seconds + " seconds";
 	  if (distance < 0) {
 	    clearInterval(x);
 	    document.getElementById("demo").innerHTML = "EXPIRED";
