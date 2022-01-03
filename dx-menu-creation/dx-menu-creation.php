@@ -101,7 +101,7 @@ function dx_settings_page() {
                 <?php checked( get_option( 'dx_switch_plugin' ), 'true' ); ?> ' . checked( 1, get_option( 'dx_switch_plugin' ), false ) . '/>
             </p>
     		<p class="submit">
-                <?php submit_button( 'save', 'primary' ); ?>
+                <?php submit_button( 'Save', 'primary' ); ?>
     		</p>
     	</form>
     </div>
