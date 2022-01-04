@@ -209,63 +209,63 @@ function dx_darksite_redirection_call() {
     );
 
     // set all input names as php vars
-    $dx_hidden_field_name = 'dx_submit_hidden';
-    $dx_redirect_name     = 'dx_redirect_to';
-	$dx_date_name         = 'dx_date';
-	$dx_time_name         = 'dx_time';
-    $dx_margin_field_name = 'dx_margin_top';
-    $dx_editor_id         = 'dx_my_editor';
+    $dx_hidden_field_name_second = 'dx_submit_hidden_second';
+    $dx_redirect_name_second     = 'dx_redirect_to_second';
+	$dx_date_name_second         = 'dx_date_second';
+	$dx_time_name_second         = 'dx_time_second';
+    $dx_margin_field_name_second = 'dx_margin_top_second';
+    $dx_editor_id_second         = 'dx_my_editor_second';
 
     // checks if the 4 fields have data stored
-    if( ! empty( get_option( $dx_editor_id ) ) ) {
-        $dx_editor_content =  ( get_option( $dx_editor_id ) );
+    if( ! empty( get_option( $dx_editor_id_second ) ) ) {
+        $dx_editor_content_second =  ( get_option( $dx_editor_id_second ) );
     } else {
-        $dx_editor_content = '';
+        $dx_editor_content_second = '';
     }
 
-    if( ! empty( get_option( $dx_redirect_name ) ) ) {
-        $dx_redirect_value = get_option( $dx_redirect_name );
+    if( ! empty( get_option( $dx_redirect_name_second ) ) ) {
+        $dx_redirect_value_second = get_option( $dx_redirect_name_second );
     } else {
-        $dx_redirect_value = '';
+        $dx_redirect_value_second = '';
     }
 
-    if( ! empty( get_option( $dx_margin_field_name ) ) ) {
-        $dx_margin_field_value = get_option( $dx_margin_field_name );
+    if( ! empty( get_option( $dx_margin_field_name_second ) ) ) {
+        $dx_margin_field_value_second = get_option( $dx_margin_field_name_second );
     } else {
-        $dx_margin_field_value = 0;
+        $dx_margin_field_value_second = 0;
     }
 
-	if( ! empty( get_option( $dx_date_name ) ) ) {
-        $dx_date_value = get_option( $dx_date_name );
+	if( ! empty( get_option( $dx_date_name_second ) ) ) {
+        $dx_date_value_second = get_option( $dx_date_name_second );
     } else {
-        $dx_date_value = '';
+        $dx_date_value_second = '';
     }
 
-	if( ! empty( get_option( $dx_time_name ) ) ) {
-        $dx_time_value = get_option( $dx_time_name );
+	if( ! empty( get_option( $dx_time_name_second ) ) ) {
+        $dx_time_value_second = get_option( $dx_time_name_second );
     } else {
-        $dx_time_value = '';
+        $dx_time_value_second = '';
     }
 
     // saves data from the 5 input fields in wp_options table
-    if( isset( $_POST[ $dx_hidden_field_name ] ) && $_POST[ $dx_hidden_field_name ] == 'Y' ) {
-        $dx_redirect_value     = esc_url( $_POST[ $dx_redirect_name ] );
-		$dx_date_value         = $_POST[ $dx_date_name ];
-		$dx_time_value         = $_POST[ $dx_time_name ];
-        $dx_editor_content     = sanitize_text_field( $_POST[ $dx_editor_id ] );
-        $dx_margin_field_value = esc_html ( $_POST[ $dx_margin_field_name ] );
+    if( isset( $_POST[ $dx_hidden_field_name_second ] ) && $_POST[ $dx_hidden_field_name_second ] == 'Y' ) {
+        $dx_redirect_value_second     = esc_url( $_POST[ $dx_redirect_name_second ] );
+		$dx_date_value_second         = $_POST[ $dx_date_name_second ];
+		$dx_time_value_second         = $_POST[ $dx_time_name_second ];
+        $dx_editor_content_second     = sanitize_text_field( $_POST[ $dx_editor_id_second ] );
+        $dx_margin_field_value_second = esc_html ( $_POST[ $dx_margin_field_name_second ] );
 
-        $dx_sanitized_content = sanitize_text_field( $dx_editor_content );
+        $dx_sanitized_content_second = sanitize_text_field( $dx_editor_content_second );
 
-        update_option( $dx_redirect_name, $dx_redirect_value );
-		update_option( $dx_date_name, $dx_date_value );
-		update_option( $dx_time_name, $dx_time_value );
-        update_option( $dx_editor_id, $dx_editor_content );
-        update_option( $dx_margin_field_name, esc_html( $dx_sanitized_margin ) );
+        update_option( $dx_redirect_name_second, $dx_redirect_value_second );
+		update_option( $dx_date_name_second, $dx_date_value_second );
+		update_option( $dx_time_name_second, $dx_time_value_second );
+        update_option( $dx_editor_id_second, $dx_editor_content_second );
+        update_option( $dx_margin_field_name_second, esc_html( $dx_sanitized_margin_second ) );
 
-        if( isset( $_POST['image_url'] ) ) {
-            $image_url = $_POST['image_url'];
-            update_option( 'dx-dark-site-image', $image_url );
+        if( isset( $_POST['image_url_second'] ) ) {
+            $image_url_second = $_POST['image_url_second'];
+            update_option( 'dx-dark-site-image-second', $image_url_second );
         }
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
     } ?>
@@ -278,25 +278,25 @@ function dx_darksite_redirection_call() {
     		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site' ); ?></h3>
 
     		<p><?php _e("Redirect to:", 'dx-dark-site' ); ?>
-    			<input type="text" required name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
+    			<input type="text" required name="<?php echo $dx_redirect_name_second; ?>" value="<?php echo $dx_redirect_value_second; ?>" size="40">
     		</p><hr />
 
 			<p><?php _e("Expiry Date:", 'dx-dark-site' ); ?>
-				<input type="date" name="<?php echo $dx_date_name; ?>" value="<?php echo $dx_date_value; ?>">
+				<input type="date" name="<?php echo $dx_date_name_second; ?>" value="<?php echo $dx_date_value_second; ?>">
     		</p><hr />
 
 			<p><?php _e("Expiry Time:", 'dx-dark-site' ); ?>
-				<input type="time" step=1 name="<?php echo $dx_time_name; ?>" value="<?php echo $dx_time_value; ?>">
+				<input type="time" step=1 name="<?php echo $dx_time_name_second; ?>" value="<?php echo $dx_time_value_second; ?>">
     		</p><hr />
 
     		<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
 
             <p>
-                <?php  wp_editor( wp_unslash( $dx_editor_content ), $dx_editor_id, $editor_settings ); ?>
+                <?php  wp_editor( wp_unslash( $dx_editor_content_second ), $dx_editor_id_second, $editor_settings_second ); ?>
             </p>
 
             <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
-                <input type="number" name="<?php echo $dx_margin_field_name; ?>" value="<?php echo $dx_margin_field_value; ?>" min=0 max=20>
+                <input type="number" name="<?php echo $dx_margin_field_name_second; ?>" value="<?php echo $dx_margin_field_value_second; ?>" min=0 max=20>
             </p>
 
             <p>

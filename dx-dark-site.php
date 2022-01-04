@@ -121,6 +121,111 @@ function dx_set_darksite_cookie() {
 }
 add_action( 'wp_head', 'dx_set_darksite_cookie' );
 
+/**
+ *
+ * Redirect on added URL from Settings->Dark Site->REDIRECTION
+ *
+ */
+function dx_darksite_redirect_second() {
+	global $wp;
+
+	$page_id_second = get_the_ID();
+
+	if( has_shortcode( get_option( 'dx_my_editor_second' ), 'counter' ) || has_shortcode( get_post_field('post_content_second', $page_id), 'counter' )){
+		return;
+	}
+
+	$dx_redirect_to_second = get_option( 'dx_redirect_to_second' );
+	$dx_current_url_second = home_url( add_query_arg( array( $_GET ), $wp->request ) );
+	$dx_url_with_dash_second = $dx_current_url_second . '/';
+
+	// Redirect all visitors, if the option is enabled
+	if( $dx_redirect_to_second != '' && ! is_user_logged_in() ) {
+		if(  $dx_current_url_second !== $dx_redirect_to_second && $dx_url_with_dash_second !== $dx_redirect_to_second ) {
+			wp_redirect( $dx_redirect_to_second );
+			exit;
+		}
+	}
+}
+add_action( 'template_redirect', 'dx_darksite_redirect_second' );
+
+/**
+ *
+ * This functions renders the content from  WYSIWYG redactor as notice on the front-end
+ *
+ */
+function dx_darksite_notice_second() {
+	if ( ! empty( get_option( 'dx_my_editor_second' ) ) ) {
+		if( ! isset( $_COOKIE['dx_darksite_note_second'] ) ) {
+			if( ! empty( get_option( 'dx_margin_top_second' ) ) ) {
+				$dx_margin_top_second = get_option( 'dx_margin_top_second' );
+			} else {
+				$dx_margin_top_second = 0;
+			}
+			$dx_editor_content_second = get_option( 'dx_my_editor_second' );
+			$dx_unslashed_content_second = wp_unslash( $dx_editor_content_second );
+
+			$dx_editor_content_second = get_option( 'dx_my_editor_second' );
+			$dx_date_second = get_option( 'dx_date_second' );
+			$dx_time_second = get_option( 'dx_time_second' );
+
+			$dx_unslashed_content_second = wp_unslash( $dx_editor_content_second );
+			$dx_unslashed_date_second = wp_unslash( $dx_date_second );
+			$dx_unslashed_time_second = wp_unslash( $dx_time_second );
+
+			
+			$dx_date_kses_second = wp_kses_data( $dx_unslashed_date_second );
+			$dx_time_kses_second = wp_kses_data( $dx_unslashed_time_second );
+			$dx_date_time_second = $dx_date_kses_second . ' ' . $dx_time_kses_second;
+			$dx_content_second = wp_kses_data( $dx_unslashed_content_second );
+
+			$expiry_date_second  = strtotime( $dx_date_time_second );
++			$current_date_second = strtotime( gmdate( 'Y-m-d h:i:s' ) );
+			?>
+			<?php if ( $expiry_date_second >= $current_date_second ) : ?>
+			<div class="darksite-notice">
+				<div class="darksite-notice-container">
+					<div class="darksite-notice-image">
+						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
+					</div>
+					<div class="darksite-notice-content"><?php echo apply_filters( 'the_content_second', $dx_content_second ); ?></div>
+					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
+				</div><!-- .darksite-notice-container -->
+			</div><!-- .darksite-notice -->
+			<?php endif; ?>
+
+			<style type="text/css">
+				.darksite-notice { margin-top: <?php echo $dx_margin_top_second ?>rem; }
+			</style>
+		<?php
+		}
+	}
+}
+add_action( 'wp_head', 'dx_darksite_notice_second' );
+
+/**
+ *
+ * We are aware this is an inline script. No need for additional files for this small script
+ *
+ */
+function dx_set_darksite_cookie_second() {
+	if( ! empty( get_option( 'dx_my_editor_second' ) ) ) { ?>
+		<script>
+			jQuery(function($){
+				let $notice = $( '.darksite-notice' );
+			});
+			function SetDarksiteCookie() {
+				days=0.5; // number of days to keep the cookie
+				currentDate = new Date();
+				currentDate.setTime( currentDate.getTime() + ( days*24*60*60*1000 ) );
+				document.cookie = 'dx_darksite_note=closed; expires=' + currentDate.toGMTString();
+				jQuery( '.darksite-notice' ).hide();
+			}
+		</script> <?php
+	}
+}
+add_action( 'wp_head', 'dx_set_darksite_cookie_second' );
+
 
 /**
  * Enqueue Styles
