@@ -72,7 +72,7 @@ function dx_darksite_notice() {
 			$dx_date_kses = wp_kses_data( $dx_unslashed_date );
 			$dx_time_kses = wp_kses_data( $dx_unslashed_time );
 			$dx_date_time = $dx_date_kses . ' ' . $dx_time_kses;
-			$dx_content = wp_kses_data( $dx_unslashed_content ) . ' [global-counter time="' . $dx_date_time . '"]';
+			$dx_content = wp_kses_data( $dx_unslashed_content );
 
 			$expiry_date  = strtotime( $dx_date_time );
 +			$current_date = strtotime( gmdate( 'Y-m-d h:i:s' ) );
