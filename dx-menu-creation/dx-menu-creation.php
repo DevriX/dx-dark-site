@@ -202,7 +202,7 @@ function dx_darksite_redirection_call() {
         wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
     }
 
-    $editor_settings = array(
+    $editor_settings_second = array(
         'media_buttons' => false,
         'quicktags' => false,
         'teeny' => true,
@@ -273,7 +273,7 @@ function dx_darksite_redirection_call() {
     	<h1><?php _e( 'Dark Site', 'dx-dark-site' ); ?></h1>
     	<form name="form1" method="post" action="">
 
-    		<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
+    		<input type="hidden" name="<?php echo $dx_hidden_field_name_second; ?>" value="Y">
 
     		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site' ); ?></h3>
 
