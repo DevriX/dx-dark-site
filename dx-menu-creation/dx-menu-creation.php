@@ -267,35 +267,35 @@ function dx_darksite_redirection_call() {
             $image_url_second = $_POST['image_url_second'];
             update_option( 'dx-dark-site-image-second', $image_url_second );
         }
-        ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
+        ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site-redirection' ); ?></strong></p></div> <?php
     } ?>
     <div class="wrap">
-    	<h1><?php _e( 'Dark Site', 'dx-dark-site' ); ?></h1>
+    	<h1><?php _e( 'Dark Site', 'dx-dark-site-redirection' ); ?></h1>
     	<form name="form1" method="post" action="">
 
     		<input type="hidden" name="<?php echo $dx_hidden_field_name_second; ?>" value="Y">
 
-    		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site' ); ?></h3>
+    		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site-redirection' ); ?></h3>
 
-    		<p><?php _e("Redirect to:", 'dx-dark-site' ); ?>
+    		<p><?php _e("Redirect to:", 'dx-dark-site-redirection' ); ?>
     			<input type="text" required name="<?php echo $dx_redirect_name_second; ?>" value="<?php echo $dx_redirect_value_second; ?>" size="40">
     		</p><hr />
 
-			<p><?php _e("Expiry Date:", 'dx-dark-site' ); ?>
+			<p><?php _e("Expiry Date:", 'dx-dark-site-redirection' ); ?>
 				<input type="date" name="<?php echo $dx_date_name_second; ?>" value="<?php echo $dx_date_value_second; ?>">
     		</p><hr />
 
-			<p><?php _e("Expiry Time:", 'dx-dark-site' ); ?>
+			<p><?php _e("Expiry Time:", 'dx-dark-site-redirection' ); ?>
 				<input type="time" step=1 name="<?php echo $dx_time_name_second; ?>" value="<?php echo $dx_time_value_second; ?>">
     		</p><hr />
 
-    		<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
+    		<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
 
             <p>
                 <?php  wp_editor( wp_unslash( $dx_editor_content_second ), $dx_editor_id_second, $editor_settings_second ); ?>
             </p>
 
-            <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
+            <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site-redirection' ); ?>
                 <input type="number" name="<?php echo $dx_margin_field_name_second; ?>" value="<?php echo $dx_margin_field_value_second; ?>" min=0 max=20>
             </p>
 

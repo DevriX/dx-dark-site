@@ -188,7 +188,7 @@ function dx_darksite_notice_second() {
 					<div class="darksite-notice-image">
 						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png' ?>" alt="warning">
 					</div>
-					<div class="darksite-notice-content"><?php echo apply_filters( 'the_content_second', $dx_content_second ); ?></div>
+					<div class="darksite-notice-content"><?php echo apply_filters( 'the_content', $dx_content_second ); ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div><!-- .darksite-notice-container -->
 			</div><!-- .darksite-notice -->
@@ -269,7 +269,7 @@ function shortocde_handle( $atts ) { ?>
             if(timeleft <= 0){
 			    clearInterval(downloadTimer);
 			    document.getElementById("countdown").innerHTML = "Redirecting Now";
-				window.location.href = "<?php echo get_option( 'dx_redirect_to' ); ?>";
+				window.location.href = "<?php echo get_option( 'dx_redirect_to_second' ); ?>";
             } else {
 			    document.getElementById("countdown").innerHTML = timeleft + " seconds";
             }
