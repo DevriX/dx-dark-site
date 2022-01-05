@@ -16,6 +16,25 @@ define( 'DX_STYLES_VERSION', '20201013' );
 
 require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 
+$option_feature = get_option( 'enable-feature' );
+/**
+* if checked hooked the functions
+*/
+if ( '1' === $option_feature ) {
+	add_action( 'wp_head', 'dx_darksite_notice' );
+
+}
+
+$option_feature_second = get_option( 'enable-feature_second' );
+/**
+* if checked hooked the functions
+*/
+if ( '1' === $option_feature_second ) {
+	add_action( 'wp_head', 'dx_darksite_notice_second' );
+
+}
+
+
 /**
  *
  * Redirect on added URL from Settings->Dark Site->REDIRECTION
@@ -96,7 +115,6 @@ function dx_darksite_notice() {
 		}
 	}
 }
-add_action( 'wp_head', 'dx_darksite_notice' );
 
 /**
  *
@@ -201,7 +219,6 @@ function dx_darksite_notice_second() {
 		}
 	}
 }
-add_action( 'wp_head', 'dx_darksite_notice_second' );
 
 /**
  *
@@ -232,6 +249,10 @@ add_action( 'wp_head', 'dx_set_darksite_cookie_second' );
  */
 function dx_plugin_scripts() {
     wp_enqueue_style( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/css/dx-dark-site.css', '', DX_STYLES_VERSION );
+	wp_enqueue_script( 'jquery' );
+	wp_register_script( 'dx-dark-site', plugins_url( 'assets/js/dx-dark-site.js', __FILE__ ), array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'jquery' );
+	wp_register_script( 'dx-dark-site-second', plugins_url( 'assets/js/dx-dark-site_second.js', __FILE__ ), array( 'jquery' ), '1.0', true );
 }
 
 add_action( 'wp_enqueue_scripts', 'dx_plugin_scripts' );
@@ -305,12 +326,3 @@ function global_counter_shortocde_handle( $atts ) {
 	</script>
 <?php return '<b id="counter"></b>';
 }
-
-function deactivate_this_plugin(){
-    if (get_option('dx_switch_plugin') !== 'true') {
-        deactivate_plugins('/dx-dark-site/dx-dark-site.php', true);
-    }
-    update_option('dx_switch_plugin', 'true');
-}
-add_action('admin_init', 'deactivate_this_plugin');
-

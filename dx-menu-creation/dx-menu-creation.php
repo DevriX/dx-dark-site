@@ -89,7 +89,6 @@ function dx_settings_page() {
 
     $editor_settings = array(
         'media_buttons' => false,
-        'quicktags' => false,
         'teeny' => true,
     );
 
@@ -119,6 +118,10 @@ function dx_settings_page() {
     }
 
     // saves data from the 5 input fields in wp_options table
+	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-feature'] ) ) {
+		update_option( 'enable-feature', $_POST['data']['enable-feature'] );
+	}
+
     if( isset( $_POST[ $dx_hidden_field_name ] ) && $_POST[ $dx_hidden_field_name ] == 'Y' ) {
         $dx_redirect_value     = esc_url( $_POST[ $dx_redirect_name ] );
         $dx_editor_content     = sanitize_text_field( $_POST[ $dx_editor_id ] );
@@ -135,14 +138,20 @@ function dx_settings_page() {
             update_option( 'dx-dark-site-image', $image_url );
         }
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
-    } ?>
+    } 
+	
+	$checkbox_enable_feature_settings  = '<input type="checkbox" id="enable-feature" name="enable-feature" value="1" ' . checked( 1, get_option( 'enable-feature' ), false ) . '/>';
+	$checkbox_enable_feature_label     = '<label for="enable-feature"> Enable banner </label>';
+	$checkbox_enable_feature_settings .= $checkbox_enable_feature_label;
+
+	?>
     <div class="wrap">
     	<h1><?php _e( 'Countdown banner', 'dx-dark-site' ); ?></h1>
     	<form name="form1" method="post" action="">
 
     		<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
 
-    		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site' ); ?></h3>
+			<h1 class="description"><?php _e( $checkbox_enable_feature_settings, 'dx-dark-site' ); ?></h1>
 
     		<p><?php _e("Redirect to:", 'dx-dark-site' ); ?>
     			<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
@@ -178,7 +187,6 @@ function dx_darksite_redirection_call() {
 
     $editor_settings_second = array(
         'media_buttons' => false,
-        'quicktags' => false,
         'teeny' => true,
     );
 
@@ -208,6 +216,10 @@ function dx_darksite_redirection_call() {
     }
 
     // saves data from the 5 input fields in wp_options table
+	if ( isset( $_POST['data-second'] ) && isset( $_POST['data-second']['enable-feature-second'] ) ) {
+		update_option( 'enable-feature-second', $_POST['data-second']['enable-feature-second'] );
+	}
+
     if( isset( $_POST[ $dx_hidden_field_name_second ] ) && $_POST[ $dx_hidden_field_name_second ] == 'Y' ) {
         $dx_redirect_value_second     = esc_url( $_POST[ $dx_redirect_name_second ] );
         $dx_editor_content_second     = sanitize_text_field( $_POST[ $dx_editor_id_second ] );
@@ -224,17 +236,23 @@ function dx_darksite_redirection_call() {
             update_option( 'dx-dark-site-image-second', $image_url_second );
         }
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site-redirection' ); ?></strong></p></div> <?php
-    } ?>
+    } 
+	
+	$checkbox_enable_feature_settings_second  = '<input type="checkbox" id="enable-feature-second" name="enable-feature-second" value="1" ' . checked( 1, get_option( 'enable-feature-second' ), false ) . '/>';
+	$checkbox_enable_feature_label_second     = '<label for="enable-feature-second"> Enable banner </label>';
+	$checkbox_enable_feature_settings_second .= $checkbox_enable_feature_label_second;
+	
+	?>
     <div class="wrap">
     	<h1><?php _e( 'Redirection Banner', 'dx-dark-site-redirection' ); ?></h1>
     	<form name="form1" method="post" action="">
 
     		<input type="hidden" name="<?php echo $dx_hidden_field_name_second; ?>" value="Y">
 
-    		<h3> <?php _e( 'REDIRECTION', 'dx-dark-site-redirection' ); ?></h3>
+			<h1 class="description"><?php _e( $checkbox_enable_feature_settings_second, 'dx-dark-site' ); ?></h1>
 
     		<p><?php _e("Redirect to:", 'dx-dark-site-redirection' ); ?>
-    			<input type="text" required name="<?php echo $dx_redirect_name_second; ?>" value="<?php echo $dx_redirect_value_second; ?>" size="40">
+    			<input type="text" name="<?php echo $dx_redirect_name_second; ?>" value="<?php echo $dx_redirect_value_second; ?>" size="40">
     		</p><hr />
 
     		<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
