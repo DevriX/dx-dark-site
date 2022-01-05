@@ -126,7 +126,7 @@ function dx_add_counter_shortcode( $atts ) {
 
 	return shortocde_handle( $attributes['seconds'] );
 }
-add_shortcode( 'counter', 'dx_add_counter_shortcode' );
+
 
 /**
  * Global Counter Shortcode
@@ -139,7 +139,7 @@ function dx_add_global_counter_shortcode( $atts ) {
 
 	return global_counter_shortocde_handle( $attributes['time'] );
 }
-add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
+
 
 function shortocde_handle( $atts ) { ?>
     <script type="text/javascript">
@@ -185,11 +185,10 @@ function global_counter_shortocde_handle( $atts ) {
 <?php return '<b id="counter"></b>';
 }
 
-function deactivate_this_plugin(){
-    if (get_option('dx_switch_plugin') !== 'true') {
-        deactivate_plugins('/dx-dark-site/dx-dark-site.php', true);
-    }
-    update_option('dx_switch_plugin', 'true');
+
+if ( get_option( 'dx_switch_plugin' ) === '1' ) {
+    add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
+	add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 }
-add_action('admin_init', 'deactivate_this_plugin');
+
 

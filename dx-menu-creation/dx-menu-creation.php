@@ -96,7 +96,7 @@ function dx_settings_page() {
             <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
                 <input type="number" name="<?php echo $dx_margin_field_name?>" value="<?php echo $dx_margin_field_value ?>" min=0 max=20>
             </p>
-            <p> <?php _e( 'Activate Plugin :', 'dx-dark-site' ); ?>
+            <p> <?php _e( 'Activate Feature :', 'dx-dark-site' ); ?>
                 <input type="checkbox" value="true" name="dx_switch_plugin" id="dx_switch_plugin"
                 <?php checked( get_option( 'dx_switch_plugin' ), 'true' ); ?> ' . checked( 1, get_option( 'dx_switch_plugin' ), false ) . '/>
             </p>
