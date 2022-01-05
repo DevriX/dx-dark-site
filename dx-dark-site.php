@@ -21,7 +21,7 @@ $option_feature = get_option( 'enable-feature' );
 * if checked hooked the functions
 */
 if ( '1' === $option_feature ) {
-	add_action( 'wp_head', 'dx_darksite_notice' );
+	add_action( 'wp_head', 'dx_darksite_notice_second' );
 
 }
 
@@ -105,6 +105,7 @@ function dx_darksite_notice() {
 		}
 	}
 }
+add_action( 'wp_head', 'dx_darksite_notice' );
 
 /**
  *
@@ -209,7 +210,6 @@ function dx_darksite_notice_second() {
 		}
 	}
 }
-add_action( 'wp_head', 'dx_darksite_notice_second' );
 
 /**
  *

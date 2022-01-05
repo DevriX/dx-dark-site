@@ -140,18 +140,12 @@ function dx_settings_page() {
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
     } 
 	
-	$checkbox_enable_feature_settings  = '<input type="checkbox" id="enable-feature" name="enable-feature" value="1" ' . checked( 1, get_option( 'enable-feature' ), false ) . '/>';
-	$checkbox_enable_feature_label     = '<label for="enable-feature"> Enable banner </label>';
-	$checkbox_enable_feature_settings .= $checkbox_enable_feature_label;
-
 	?>
     <div class="wrap">
     	<h1><?php _e( 'Countdown banner', 'dx-dark-site' ); ?></h1>
     	<form name="form1" method="post" action="">
 
     		<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
-
-			<h1 class="description"><?php _e( $checkbox_enable_feature_settings, 'dx-dark-site' ); ?></h1>
 
     		<p><?php _e("Redirect to:", 'dx-dark-site' ); ?>
     			<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
@@ -233,12 +227,19 @@ function dx_darksite_redirection_call() {
         }
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site-redirection' ); ?></strong></p></div> <?php
     } 
+	
+	$checkbox_enable_feature_settings  = '<input type="checkbox" id="enable-feature" name="enable-feature" value="1" ' . checked( 1, get_option( 'enable-feature' ), false ) . '/>';
+	$checkbox_enable_feature_label     = '<label for="enable-feature"> Enable banner </label>';
+	$checkbox_enable_feature_settings .= $checkbox_enable_feature_label;
+
 	?>
     <div class="wrap">
     	<h1><?php _e( 'Redirection Banner', 'dx-dark-site-redirection' ); ?></h1>
     	<form name="form1" method="post" action="">
 
     		<input type="hidden" name="<?php echo $dx_hidden_field_name_second; ?>" value="Y">
+
+			<h1 class="description"><?php _e( $checkbox_enable_feature_settings, 'dx-dark-site' ); ?></h1>
 
     		<p><?php _e("Redirect to:", 'dx-dark-site-redirection' ); ?>
     			<input type="text" name="<?php echo $dx_redirect_name_second; ?>" value="<?php echo $dx_redirect_value_second; ?>" size="40">
