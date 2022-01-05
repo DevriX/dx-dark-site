@@ -126,6 +126,7 @@ function dx_add_counter_shortcode( $atts ) {
 
 	return shortocde_handle( $attributes['seconds'] );
 }
+add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 
 
 /**
@@ -139,7 +140,7 @@ function dx_add_global_counter_shortcode( $atts ) {
 
 	return global_counter_shortocde_handle( $attributes['time'] );
 }
-
+add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
 
 function shortocde_handle( $atts ) { ?>
     <script type="text/javascript">
@@ -184,11 +185,3 @@ function global_counter_shortocde_handle( $atts ) {
 	</script>
 <?php return '<b id="counter"></b>';
 }
-
-
-if ( get_option( 'dx_switch_plugin' ) === '1' ) {
-    add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
-	add_shortcode( 'counter', 'dx_add_counter_shortcode' );
-}
-
-
