@@ -96,8 +96,6 @@ function dx_settings_page() {
     // set all input names as php vars
     $dx_hidden_field_name = 'dx_submit_hidden';
     $dx_redirect_name     = 'dx_redirect_to';
-	$dx_date_name         = 'dx_date';
-	$dx_time_name         = 'dx_time';
     $dx_margin_field_name = 'dx_margin_top';
     $dx_editor_id         = 'dx_my_editor';
 
@@ -120,31 +118,15 @@ function dx_settings_page() {
         $dx_margin_field_value = 0;
     }
 
-	if( ! empty( get_option( $dx_date_name ) ) ) {
-        $dx_date_value = get_option( $dx_date_name );
-    } else {
-        $dx_date_value = '';
-    }
-
-	if( ! empty( get_option( $dx_time_name ) ) ) {
-        $dx_time_value = get_option( $dx_time_name );
-    } else {
-        $dx_time_value = '';
-    }
-
     // saves data from the 5 input fields in wp_options table
     if( isset( $_POST[ $dx_hidden_field_name ] ) && $_POST[ $dx_hidden_field_name ] == 'Y' ) {
         $dx_redirect_value     = esc_url( $_POST[ $dx_redirect_name ] );
-		$dx_date_value         = $_POST[ $dx_date_name ];
-		$dx_time_value         = $_POST[ $dx_time_name ];
         $dx_editor_content     = sanitize_text_field( $_POST[ $dx_editor_id ] );
         $dx_margin_field_value = esc_html ( $_POST[ $dx_margin_field_name ] );
 
         $dx_sanitized_content = sanitize_text_field( $dx_editor_content );
 
         update_option( $dx_redirect_name, $dx_redirect_value );
-		update_option( $dx_date_name, $dx_date_value );
-		update_option( $dx_time_name, $dx_time_value );
         update_option( $dx_editor_id, $dx_editor_content );
         update_option( $dx_margin_field_name, esc_html( $dx_sanitized_margin ) );
 
@@ -155,7 +137,7 @@ function dx_settings_page() {
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site' ); ?></strong></p></div> <?php
     } ?>
     <div class="wrap">
-    	<h1><?php _e( 'Dark Site', 'dx-dark-site' ); ?></h1>
+    	<h1><?php _e( 'Countdown banner', 'dx-dark-site' ); ?></h1>
     	<form name="form1" method="post" action="">
 
     		<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
@@ -164,14 +146,6 @@ function dx_settings_page() {
 
     		<p><?php _e("Redirect to:", 'dx-dark-site' ); ?>
     			<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
-    		</p><hr />
-
-			<p><?php _e("Expiry Date:", 'dx-dark-site' ); ?>
-				<input type="date" name="<?php echo $dx_date_name; ?>" value="<?php echo $dx_date_value; ?>">
-    		</p><hr />
-
-			<p><?php _e("Expiry Time:", 'dx-dark-site' ); ?>
-				<input type="time" step=1 name="<?php echo $dx_time_name; ?>" value="<?php echo $dx_time_value; ?>">
     		</p><hr />
 
     		<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
@@ -211,8 +185,6 @@ function dx_darksite_redirection_call() {
     // set all input names as php vars
     $dx_hidden_field_name_second = 'dx_submit_hidden_second';
     $dx_redirect_name_second     = 'dx_redirect_to_second';
-	$dx_date_name_second         = 'dx_date_second';
-	$dx_time_name_second         = 'dx_time_second';
     $dx_margin_field_name_second = 'dx_margin_top_second';
     $dx_editor_id_second         = 'dx_my_editor_second';
 
@@ -235,31 +207,15 @@ function dx_darksite_redirection_call() {
         $dx_margin_field_value_second = 0;
     }
 
-	if( ! empty( get_option( $dx_date_name_second ) ) ) {
-        $dx_date_value_second = get_option( $dx_date_name_second );
-    } else {
-        $dx_date_value_second = '';
-    }
-
-	if( ! empty( get_option( $dx_time_name_second ) ) ) {
-        $dx_time_value_second = get_option( $dx_time_name_second );
-    } else {
-        $dx_time_value_second = '';
-    }
-
     // saves data from the 5 input fields in wp_options table
     if( isset( $_POST[ $dx_hidden_field_name_second ] ) && $_POST[ $dx_hidden_field_name_second ] == 'Y' ) {
         $dx_redirect_value_second     = esc_url( $_POST[ $dx_redirect_name_second ] );
-		$dx_date_value_second         = $_POST[ $dx_date_name_second ];
-		$dx_time_value_second         = $_POST[ $dx_time_name_second ];
         $dx_editor_content_second     = sanitize_text_field( $_POST[ $dx_editor_id_second ] );
         $dx_margin_field_value_second = esc_html ( $_POST[ $dx_margin_field_name_second ] );
 
         $dx_sanitized_content_second = sanitize_text_field( $dx_editor_content_second );
 
         update_option( $dx_redirect_name_second, $dx_redirect_value_second );
-		update_option( $dx_date_name_second, $dx_date_value_second );
-		update_option( $dx_time_name_second, $dx_time_value_second );
         update_option( $dx_editor_id_second, $dx_editor_content_second );
         update_option( $dx_margin_field_name_second, esc_html( $dx_sanitized_margin_second ) );
 
@@ -270,7 +226,7 @@ function dx_darksite_redirection_call() {
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site-redirection' ); ?></strong></p></div> <?php
     } ?>
     <div class="wrap">
-    	<h1><?php _e( 'Dark Site', 'dx-dark-site-redirection' ); ?></h1>
+    	<h1><?php _e( 'Redirection Banner', 'dx-dark-site-redirection' ); ?></h1>
     	<form name="form1" method="post" action="">
 
     		<input type="hidden" name="<?php echo $dx_hidden_field_name_second; ?>" value="Y">
@@ -279,14 +235,6 @@ function dx_darksite_redirection_call() {
 
     		<p><?php _e("Redirect to:", 'dx-dark-site-redirection' ); ?>
     			<input type="text" required name="<?php echo $dx_redirect_name_second; ?>" value="<?php echo $dx_redirect_value_second; ?>" size="40">
-    		</p><hr />
-
-			<p><?php _e("Expiry Date:", 'dx-dark-site-redirection' ); ?>
-				<input type="date" name="<?php echo $dx_date_name_second; ?>" value="<?php echo $dx_date_value_second; ?>">
-    		</p><hr />
-
-			<p><?php _e("Expiry Time:", 'dx-dark-site-redirection' ); ?>
-				<input type="time" step=1 name="<?php echo $dx_time_name_second; ?>" value="<?php echo $dx_time_value_second; ?>">
     		</p><hr />
 
     		<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
