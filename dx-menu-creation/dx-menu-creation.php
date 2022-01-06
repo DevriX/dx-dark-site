@@ -173,51 +173,51 @@ function dx_darksite_redirection_call() {
         wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
     }
 
-    $editor_settings_second = array(
+    $editor_settings_second_banner = array(
         'media_buttons' => false,
         'teeny' => true,
     );
 
     // set all input names as php vars
-    $dx_hidden_field_name_second = 'dx_submit_hidden_second';
-    $dx_redirect_name_second     = 'dx_redirect_to_second';
-    $dx_margin_field_name_second = 'dx_margin_top_second';
-    $dx_editor_id_second         = 'dx_my_editor_second';
+    $dx_hidden_field_name_second_banner = 'dx_submit_hidden_second_banner';
+    $dx_redirect_name_second_banner     = 'dx_redirect_to_second_banner';
+    $dx_margin_field_name_second_banner = 'dx_margin_top_second_banner';
+    $dx_editor_id_second_banner         = 'dx_my_editor_second_banner';
 
     // checks if the 4 fields have data stored
-    if( ! empty( get_option( $dx_editor_id_second ) ) ) {
-        $dx_editor_content_second =  ( get_option( $dx_editor_id_second ) );
+    if( ! empty( get_option( $dx_editor_id_second_banner ) ) ) {
+        $dx_editor_content_second_banner =  ( get_option( $dx_editor_id_second_banner ) );
     } else {
-        $dx_editor_content_second = '';
+        $dx_editor_content_second_banner = '';
     }
 
-    if( ! empty( get_option( $dx_redirect_name_second ) ) ) {
-        $dx_redirect_value_second = get_option( $dx_redirect_name_second );
+    if( ! empty( get_option( $dx_redirect_name_second_banner ) ) ) {
+        $dx_redirect_value_second_banner = get_option( $dx_redirect_name_second_banner );
     } else {
-        $dx_redirect_value_second = '';
+        $dx_redirect_value_second_banner = '';
     }
 
-    if( ! empty( get_option( $dx_margin_field_name_second ) ) ) {
-        $dx_margin_field_value_second = get_option( $dx_margin_field_name_second );
+    if( ! empty( get_option( $dx_margin_field_name_second_banner ) ) ) {
+        $dx_margin_field_value_second_banner = get_option( $dx_margin_field_name_second_banner );
     } else {
-        $dx_margin_field_value_second = 0;
+        $dx_margin_field_value_second_banner = 0;
     }
 
     // saves data from the 5 input fields in wp_options table
-    if( isset( $_POST[ $dx_hidden_field_name_second ] ) && $_POST[ $dx_hidden_field_name_second ] == 'Y' ) {
-        $dx_redirect_value_second     = esc_url( $_POST[ $dx_redirect_name_second ] );
-        $dx_editor_content_second     = sanitize_text_field( $_POST[ $dx_editor_id_second ] );
-        $dx_margin_field_value_second = esc_html ( $_POST[ $dx_margin_field_name_second ] );
+    if( isset( $_POST[ $dx_hidden_field_name_second_banner ] ) && $_POST[ $dx_hidden_field_name_second_banner ] == 'Y' ) {
+        $dx_redirect_value_second_banner     = esc_url( $_POST[ $dx_redirect_name_second_banner ] );
+        $dx_editor_content_second_banner     = sanitize_text_field( $_POST[ $dx_editor_id_second_banner ] );
+        $dx_margin_field_value_second_banner = esc_html ( $_POST[ $dx_margin_field_name_second_banner ] );
 
-        $dx_sanitized_content_second = sanitize_text_field( $dx_editor_content_second );
+        $dx_sanitized_content_second_banner = sanitize_text_field( $dx_editor_content_second_banner );
 
-        update_option( $dx_redirect_name_second, $dx_redirect_value_second );
-        update_option( $dx_editor_id_second, $dx_editor_content_second );
-        update_option( $dx_margin_field_name_second, esc_html( $dx_sanitized_margin_second ) );
+        update_option( $dx_redirect_name_second_banner, $dx_redirect_value_second_banner );
+        update_option( $dx_editor_id_second_banner, $dx_editor_content_second_banner );
+        update_option( $dx_margin_field_name_second_banner, esc_html( $dx_sanitized_margin_second_banner ) );
 
-        if( isset( $_POST['image_url_second'] ) ) {
-            $image_url_second = $_POST['image_url_second'];
-            update_option( 'dx-dark-site-image-second', $image_url_second );
+        if( isset( $_POST['image_url_second_banner'] ) ) {
+            $image_url_second_banner = $_POST['image_url_second_banner'];
+            update_option( 'dx-dark-site-image-second-banner', $image_url_second_banner );
         }
 
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site-redirection' ); ?></strong></p></div> <?php
@@ -232,22 +232,22 @@ function dx_darksite_redirection_call() {
     	<h1><?php _e( 'Redirection Banner', 'dx-dark-site-redirection' ); ?></h1>
     	<form name="form1" method="post" action="">
 
-    		<input type="hidden" name="<?php echo $dx_hidden_field_name_second; ?>" value="Y">
+    		<input type="hidden" name="<?php echo $dx_hidden_field_name_second_banner; ?>" value="Y">
 
 			<h1 class="description"><?php _e( $checkbox_enable_feature_settings, 'dx-dark-site' ); ?></h1>
 
     		<p><?php _e("Redirect to:", 'dx-dark-site-redirection' ); ?>
-    			<input type="text" name="<?php echo $dx_redirect_name_second; ?>" value="<?php echo $dx_redirect_value_second; ?>" size="40">
+    			<input type="text" name="<?php echo $dx_redirect_name_second_banner; ?>" value="<?php echo $dx_redirect_value_second_banner; ?>" size="40">
     		</p><hr />
 
     		<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
 
             <p>
-                <?php  wp_editor( wp_unslash( $dx_editor_content_second ), $dx_editor_id_second, $editor_settings_second ); ?>
+                <?php  wp_editor( wp_unslash( $dx_editor_content_second_banner ), $dx_editor_id_second_banner, $editor_settings_second_banner ); ?>
             </p>
 
             <p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site-redirection' ); ?>
-                <input type="number" name="<?php echo $dx_margin_field_name_second; ?>" value="<?php echo $dx_margin_field_value_second; ?>" min=0 max=20>
+                <input type="number" name="<?php echo $dx_margin_field_name_second_banner; ?>" value="<?php echo $dx_margin_field_value_second_banner; ?>" min=0 max=20>
             </p>
 
             <p>
