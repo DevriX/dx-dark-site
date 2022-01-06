@@ -141,12 +141,18 @@ function dx_settings_page() {
 		<?php
 	}
 
+	$checkbox_enable_countdown_banner_settings  = '<input type="checkbox" id="enable-countdown-banner" name="enable-countdown-banner" value="1" ' . checked( 1, get_option( 'enable-countdown-banner' ), false ) . '/>';
+	$checkbox_enable_countdown_banner_label     = '<label for="enable-countdown-banner"> Enable banner </label>';
+	$checkbox_enable_countdown_banner_settings .= $checkbox_enable_countdown_banner_label;
+
 	?>
 	<div class="wrap">
 		<h1><?php _e( 'Countdown banner', 'dx-dark-site' ); ?></h1>
 		<form name="form1" method="post" action="">
 
 			<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
+
+			<h1 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h1>
 
 			<p><?php _e( 'Redirect to:', 'dx-dark-site' ); ?>
 				<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
@@ -236,9 +242,9 @@ function dx_darksite_redirection_call() {
 		<?php
 	}
 
-	$checkbox_enable_feature_settings  = '<input type="checkbox" id="enable-banner" name="enable-banner" value="1" ' . checked( 1, get_option( 'enable-banner' ), false ) . '/>';
-	$checkbox_enable_feature_label     = '<label for="enable-banner"> Enable banner </label>';
-	$checkbox_enable_feature_settings .= $checkbox_enable_feature_label;
+	$checkbox_enable_banner_settings  = '<input type="checkbox" id="enable-banner" name="enable-banner" value="1" ' . checked( 1, get_option( 'enable-banner' ), false ) . '/>';
+	$checkbox_enable_banner_label     = '<label for="enable-banner"> Enable banner </label>';
+	$checkbox_enable_banner_settings .= $checkbox_enable_banner_label;
 
 	?>
 	<div class="wrap">
@@ -247,10 +253,10 @@ function dx_darksite_redirection_call() {
 
 			<input type="hidden" name="<?php echo $dx_hidden_field_name_second_banner; ?>" value="Y">
 
-			<h1 class="description"><?php _e( $checkbox_enable_feature_settings, 'dx-dark-site' ); ?></h1>
+			<h1 class="description"><?php _e( $checkbox_enable_banner_settings, 'dx-dark-site' ); ?></h1>
 
 			<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
-				<input type="text" name="<?php echo $dx_redirect_name_second_banner; ?>" value="<?php echo $dx_redirect_value_second_banner; ?>" size="40">
+				<input type="text" required name="<?php echo $dx_redirect_name_second_banner; ?>" value="<?php echo $dx_redirect_value_second_banner; ?>" size="40">
 			</p><hr />
 
 			<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>

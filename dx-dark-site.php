@@ -17,11 +17,16 @@ define( 'DX_STYLES_VERSION', '20201013' );
 require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 
 $option_banner = get_option( 'enable-banner' );
+$option_countdown_banner = get_option( 'enable-countdown-banner' );
 /**
 * if checked hooked the functions
 */
 if ( '1' === $option_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice_redirection_banner' );
+
+}
+if ( '1' === $option_countdown_banner ) {
+	add_action( 'wp_head', 'dx_darksite_notice' );
 
 }
 
@@ -104,7 +109,6 @@ function dx_darksite_notice() {
 		}
 	}
 }
-add_action( 'wp_head', 'dx_darksite_notice' );
 
 /**
  *
@@ -333,5 +337,8 @@ add_action( 'wp_ajax_add_to_base', 'add_to_base' );
 function add_to_base() {
 	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-banner'] ) ) {
 		update_option( 'enable-banner', $_POST['data']['enable-banner'] );
+	}
+	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-countdown-banner'] ) ) {
+		update_option( 'enable-countdown-banner', $_POST['data']['enable-countdown-banner'] );
 	}
 }
