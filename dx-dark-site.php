@@ -23,11 +23,11 @@ $option_countdown_banner = get_option( 'enable-countdown-banner' );
 */
 if ( '1' === $option_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice_redirection_banner' );
-
+	add_action( 'template_redirect', 'dx_darksite_redirect_redirection_banner' );
 }
 if ( '1' === $option_countdown_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice' );
-
+	add_action( 'template_redirect', 'dx_darksite_redirect' );
 }
 
 /**
@@ -56,7 +56,6 @@ function dx_darksite_redirect() {
 		}
 	}
 }
-add_action( 'template_redirect', 'dx_darksite_redirect' );
 
 /**
  *
@@ -161,7 +160,6 @@ function dx_darksite_redirect_redirection_banner() {
 		}
 	}
 }
-add_action( 'template_redirect', 'dx_darksite_redirect_redirection_banner' );
 
 /**
  *
