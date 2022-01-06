@@ -147,7 +147,7 @@ function dx_settings_page() {
 
 	?>
 	<div class="wrap">
-		<h1><?php _e( 'Countdown banner', 'dx-dark-site' ); ?></h1>
+		<h1><?php _e( 'DX Dark Site', 'dx-dark-site' ); ?></h1>
 		<form name="form1" method="post" action="">
 
 			<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
