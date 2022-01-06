@@ -256,7 +256,7 @@ function dx_darksite_redirection_call() {
 			</p><hr />
 
 			<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
-
+			
 			<p>
 				<?php wp_editor( wp_unslash( $dx_editor_content_second_banner ), $dx_editor_id_second_banner, $editor_settings_second_banner ); ?>
 			</p>

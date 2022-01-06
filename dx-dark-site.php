@@ -91,7 +91,7 @@ function dx_darksite_notice() {
 			$current_date = strtotime( gmdate( 'Y-m-d h:i:s' ) );
 			?>
 			<?php if ( $expiry_date >= $current_date ) : ?>
-			<div class="darksite-notice">
+			<div id="darksite-banner" class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
 						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png'; ?>" alt="warning">
@@ -145,7 +145,7 @@ function dx_darksite_redirect_redirection_banner() {
 
 	$page_id_second_banner = get_the_ID();
 
-	if ( has_shortcode( get_option( 'dx_my_editor_second_banner' ), 'counter' ) || has_shortcode( get_post_field( 'post_content_second_banner', $page_id ), 'counter' ) ) {
+	if ( has_shortcode( get_option( 'dx_my_editor_second_banner' ), 'counter' ) || has_shortcode( get_post_field( 'post_content_second_banner', $page_id_second_banner ), 'counter' ) ) {
 		return;
 	}
 
@@ -196,7 +196,7 @@ function dx_darksite_notice_redirection_banner() {
 			$current_date_second_banner = strtotime( gmdate( 'Y-m-d h:i:s' ) );
 			?>
 			<?php if ( $expiry_date_second_banner >= $current_date_second_banner ) : ?>
-			<div class="darksite-notice">
+			<div id="darksite-banner" class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
 						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png'; ?>" alt="warning">
@@ -320,13 +320,25 @@ function global_counter_shortocde_handle( $atts ) {
 	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-	document.getElementById("counter").innerHTML = days + " days " + hours + " hours "
-	+ minutes + " minutes " + seconds + " seconds";
-	if (distance < 0) {
-		clearInterval(x);
-		document.getElementById("demo").innerHTML = "EXPIRED";
+	if ( days > 0 ) {
+		document.getElementById("counter").innerHTML = days + " days " + hours + " hours "
+		+ minutes + " minutes " + seconds + " seconds";
 	}
+	else if ( days == 0 && hours !== 0 ){
+		document.getElementById("counter").innerHTML = hours + " hours "
+		+ minutes + " minutes " + seconds + " seconds";
+	}
+	else if( days == 0 && hours == 0 && minutes !== 0 ) {
+		document.getElementById("counter").innerHTML = minutes + " minutes " + seconds + " seconds";
+	}
+	else if( days == 0 && hours == 0 && minutes == 0 ) {
+		document.getElementById("counter").innerHTML = seconds + " seconds";
+	}
+	else {
+		var element_banner = document.getElementById('darksite-banner');
+		element_banner.remove();
+	}
+
 	}, 1000);
 	</script>
 	<?php
