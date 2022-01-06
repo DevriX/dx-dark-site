@@ -17,7 +17,6 @@ function dx_add_menu_page() {
 	add_submenu_page( 'dx-darksite-settings', __( 'Redirection Banner', 'dx-dark-site-redirection' ), __( 'Redirection Banner', 'dx-dark-site-redirection' ), 'manage_options', 'dx-darksite-redirection', 'dx_darksite_redirection_call' );
 
 	add_submenu_page( 'dx-darksite-settings', __( 'Help Page', 'dx-dark-site-help' ), __( 'Help Page', 'dx-dark-site-help' ), 'manage_options', 'dx-darksite-help', 'dx_darksite_help_call' );
-
 }
 add_action( 'admin_menu', 'dx_add_menu_page' );
 
@@ -118,10 +117,6 @@ function dx_settings_page() {
     }
 
     // saves data from the 5 input fields in wp_options table
-	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-feature'] ) ) {
-		update_option( 'enable-feature', $_POST['data']['enable-feature'] );
-	}
-
     if( isset( $_POST[ $dx_hidden_field_name ] ) && $_POST[ $dx_hidden_field_name ] == 'Y' ) {
         $dx_redirect_value     = esc_url( $_POST[ $dx_redirect_name ] );
         $dx_editor_content     = sanitize_text_field( $_POST[ $dx_editor_id ] );
@@ -172,7 +167,6 @@ function dx_settings_page() {
     	</form>
     </div>
 <?php }
-
 
 function dx_darksite_redirection_call() {
     if ( ! current_user_can( 'manage_options' ) ) {
@@ -225,11 +219,12 @@ function dx_darksite_redirection_call() {
             $image_url_second = $_POST['image_url_second'];
             update_option( 'dx-dark-site-image-second', $image_url_second );
         }
+
         ?> <div class="updated"><p><strong><?php _e( 'Settings saved.', 'dx-dark-site-redirection' ); ?></strong></p></div> <?php
     } 
 	
-	$checkbox_enable_feature_settings  = '<input type="checkbox" id="enable-feature" name="enable-feature" value="1" ' . checked( 1, get_option( 'enable-feature' ), false ) . '/>';
-	$checkbox_enable_feature_label     = '<label for="enable-feature"> Enable banner </label>';
+	$checkbox_enable_feature_settings  = '<input type="checkbox" id="enable-banner" name="enable-banner" value="1" ' . checked( 1, get_option( 'enable-banner' ), false ) . '/>';
+	$checkbox_enable_feature_label     = '<label for="enable-banner"> Enable banner </label>';
 	$checkbox_enable_feature_settings .= $checkbox_enable_feature_label;
 
 	?>

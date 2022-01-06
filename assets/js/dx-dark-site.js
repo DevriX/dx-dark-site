@@ -1,22 +1,23 @@
 $ = jQuery;
+console.log("Pesho");
 
 $(document).ready(function($) {
-    $("#enable-feature").change( function() {
+    $("#enable-banner").change( function() {
 
-        if($('#enable-feature').is(':checked')) {
+        if($('#enable-banner').is(':checked')) {
             alert("Banner is enabled.");
 
-            $('#enable-feature').val( 1 );
-            var ajax_field_value = $('#enable-feature').val();
+            $('#enable-banner').val( 1 );
+            var ajax_field_value = $('#enable-banner').val();
 
-            $.post( ajaxurl, { data: { "enable-feature" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-banner" : ajax_field_value }, action: "add_to_base" } );
         } else {
             alert("Banner is disabled.");
 
-            $('#enable-feature').val( 0 );
-            var ajax_field_value = $('#enable-feature').val();
+            $('#enable-banner').val( 0 );
+            var ajax_field_value = $('#enable-banner').val();
 
-            $.post( ajaxurl, { data: { "enable-feature" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-banner" : ajax_field_value }, action: "add_to_base" } );
         }
     });
 

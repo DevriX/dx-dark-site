@@ -16,11 +16,11 @@ define( 'DX_STYLES_VERSION', '20201013' );
 
 require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 
-$option_feature = get_option( 'enable-feature' );
+$option_banner = get_option( 'enable-banner' );
 /**
 * if checked hooked the functions
 */
-if ( '1' === $option_feature ) {
+if ( '1' === $option_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice_second' );
 
 }
@@ -238,13 +238,16 @@ add_action( 'wp_head', 'dx_set_darksite_cookie_second' );
 /**
  * Enqueue Styles
  */
-function dx_plugin_scripts() {
+function dx_plugin_styles() {
     wp_enqueue_style( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/css/dx-dark-site.css', '', DX_STYLES_VERSION );
-	wp_enqueue_script( 'jquery' );
-	wp_register_script( 'dx-dark-site', plugins_url( 'assets/js/dx-dark-site.js', __FILE__ ), array( 'jquery' ), '1.0', true );
 }
+add_action( 'wp_enqueue_scripts', 'dx_plugin_styles' );
 
-add_action( 'wp_enqueue_scripts', 'dx_plugin_scripts' );
+function dx_plugin_scripts() {
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/js/dx-dark-site.js', array( 'jquery' ), '1.1', true );
+}
+add_action( 'admin_enqueue_scripts', 'dx_plugin_scripts' );
 
 /**
  * Counter Shortcode
@@ -314,4 +317,11 @@ function global_counter_shortocde_handle( $atts ) {
 	}, 1000);
 	</script>
 <?php return '<b id="counter"></b>';
+}
+
+add_action( 'wp_ajax_add_to_base', 'add_to_base' );
+function add_to_base() {
+	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-banner'] ) ) {
+		update_option( 'enable-banner', $_POST['data']['enable-banner'] );
+	}
 }
