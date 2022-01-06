@@ -154,10 +154,6 @@ function dx_settings_page() {
 
 			<h1 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h1>
 
-			<p><?php _e( 'Redirect to:', 'dx-dark-site' ); ?>
-				<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40">
-			</p><hr />
-
 			<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
 
 			<p>
