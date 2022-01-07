@@ -24,7 +24,6 @@ $option_redirection      = get_option( 'enable-redirection' );
 */
 if ( '1' === $option_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice_redirection_banner' );
-	add_action( 'template_redirect', 'dx_darksite_redirect_redirection_banner' );
 }
 if ( '1' === $option_countdown_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice' );
@@ -136,33 +135,6 @@ function dx_set_darksite_cookie() {
 	}
 }
 add_action( 'wp_head', 'dx_set_darksite_cookie' );
-
-/**
- *
- * Redirect on added URL from Settings->Dark Site->REDIRECTION
- *
- */
-function dx_darksite_redirect_redirection_banner() {
-	global $wp;
-
-	$page_id_second_banner = get_the_ID();
-
-	if ( has_shortcode( get_option( 'dx_my_editor_second_banner' ), 'counter' ) || has_shortcode( get_post_field( 'post_content_second_banner', $page_id_second_banner ), 'counter' ) ) {
-		return;
-	}
-
-	$dx_redirect_to_second_banner   = get_option( 'dx_redirect_to_second_banner' );
-	$dx_current_url_second_banner   = home_url( add_query_arg( array( $_GET ), $wp->request ) );
-	$dx_url_with_dash_second_banner = $dx_current_url_second_banner . '/';
-
-	// Redirect all visitors, if the option is enabled
-	if ( '' !== $dx_redirect_to_second_banner && ! is_user_logged_in() ) {
-		if ( $dx_current_url_second_banner !== $dx_redirect_to_second_banner && $dx_url_with_dash_second_banner !== $dx_redirect_to_second_banner ) {
-			wp_redirect( $dx_redirect_to_second_banner );
-			exit;
-		}
-	}
-}
 
 /**
  *
