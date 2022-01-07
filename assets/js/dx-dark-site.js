@@ -10,6 +10,8 @@ $(document).ready(function($) {
             var ajax_field_value = $('#enable-banner').val();
 
             $.post( ajaxurl, { data: { "enable-banner" : ajax_field_value }, action: "add_to_base" } );
+
+			$.post( ajaxurl, { data: { "enable-countdown-banner" : 0 }, action: "add_to_base" } );
         } else {
             alert("Redirection banner is disabled.");
 
@@ -32,6 +34,8 @@ $(document).ready(function($) {
             var ajax_field_value = $('#enable-countdown-banner').val();
 
             $.post( ajaxurl, { data: { "enable-countdown-banner" : ajax_field_value }, action: "add_to_base" } );
+
+			$.post( ajaxurl, { data: { "enable-banner" : 0 }, action: "add_to_base" } );
         } else {
             alert("Countdown banner is disabled.");
 
