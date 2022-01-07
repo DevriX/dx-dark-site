@@ -157,7 +157,7 @@ function dx_settings_page() {
 			<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
 
 			<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
-				<input type="text" required name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40"> <b><?php _e( $checkbox_enable_redirection_settings, 'dx-dark-site' ); ?></b>
+				<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40"> <b><?php _e( $checkbox_enable_redirection_settings, 'dx-dark-site' ); ?></b>
 			</p><hr />
 
 			<h1 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h1>
