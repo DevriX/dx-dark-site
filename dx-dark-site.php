@@ -16,8 +16,9 @@ define( 'DX_STYLES_VERSION', '20201013' );
 
 require_once( DX_DARKSITE_PATH . 'dx-menu-creation/dx-menu-creation.php' );
 
-$option_banner = get_option( 'enable-banner' );
+$option_banner           = get_option( 'enable-banner' );
 $option_countdown_banner = get_option( 'enable-countdown-banner' );
+$option_redirection      = get_option( 'enable-redirection' );
 /**
 * if checked hooked the functions
 */
@@ -27,6 +28,8 @@ if ( '1' === $option_banner ) {
 }
 if ( '1' === $option_countdown_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice' );
+}
+if ( '1' === $option_redirection ) {
 	add_action( 'template_redirect', 'dx_darksite_redirect' );
 }
 
@@ -249,7 +252,7 @@ add_action( 'wp_enqueue_scripts', 'dx_plugin_styles' );
 
 function dx_plugin_scripts() {
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/js/dx-dark-site.js', array( 'jquery' ), '1.1', true );
+	wp_enqueue_script( 'dx-dark-site', plugin_dir_url( __FILE__ ) . 'assets/js/dx-dark-site.js', array( 'jquery' ), '1.2', true );
 }
 add_action( 'admin_enqueue_scripts', 'dx_plugin_scripts' );
 
@@ -350,5 +353,8 @@ function add_to_base() {
 	}
 	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-countdown-banner'] ) ) {
 		update_option( 'enable-countdown-banner', $_POST['data']['enable-countdown-banner'] );
+	}
+	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-redirection'] ) ) {
+		update_option( 'enable-redirection', $_POST['data']['enable-redirection'] );
 	}
 }

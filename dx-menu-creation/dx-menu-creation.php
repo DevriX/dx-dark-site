@@ -145,12 +145,20 @@ function dx_settings_page() {
 	$checkbox_enable_countdown_banner_label     = '<label for="enable-countdown-banner"> Enable banner </label>';
 	$checkbox_enable_countdown_banner_settings .= $checkbox_enable_countdown_banner_label;
 
+	$checkbox_enable_redirection_settings  = '<input type="checkbox" id="enable-redirection" name="enable-redirection" value="1" ' . checked( 1, get_option( 'enable-redirection' ), false ) . '/>';
+	$checkbox_enable_redirection_label     = '<label for="enable-redirection"> Enable redirection </label>';
+	$checkbox_enable_redirection_settings .= $checkbox_enable_redirection_label;
+
 	?>
 	<div class="wrap">
 		<h1><?php _e( 'DX Dark Site', 'dx-dark-site' ); ?></h1>
 		<form name="form1" method="post" action="">
 
 			<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
+
+			<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
+				<input type="text" required name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40"> <b><?php _e( $checkbox_enable_redirection_settings, 'dx-dark-site' ); ?></b>
+			</p><hr />
 
 			<h1 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h1>
 
