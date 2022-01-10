@@ -13,16 +13,8 @@
  */
 function dx_add_menu_page() {
 	add_menu_page( __( 'DX Dark Site', 'dx-dark-site' ), __( 'DX Dark Site', 'dx-dark-site' ), 'manage_options', 'dx-darksite-settings', 'dx_settings_page' );
-
-	add_submenu_page( 'dx-darksite-settings', __( 'Redirection Banner', 'dx-dark-site-redirection' ), __( 'Redirection Banner', 'dx-dark-site-redirection' ), 'manage_options', 'dx-darksite-redirection', 'dx_darksite_redirection_call' );
-
-	add_submenu_page( 'dx-darksite-settings', __( 'Help Page', 'dx-dark-site-help' ), __( 'Help Page', 'dx-dark-site-help' ), 'manage_options', 'dx-darksite-help', 'dx_darksite_help_call' );
 }
 add_action( 'admin_menu', 'dx_add_menu_page' );
-
-function dx_darksite_help_call() {
-	include( 'dx-dark-site-help-page.php' );
-}
 
 /**
  *
@@ -86,204 +78,39 @@ function dx_settings_page() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 
-	$editor_settings = array(
-		'media_buttons' => false,
-        'quicktags' => false,
-        'teeny' => true,
-	);
-
-	// set all input names as php vars
-	$dx_hidden_field_name = 'dx_submit_hidden';
-	$dx_redirect_name     = 'dx_redirect_to';
-	$dx_margin_field_name = 'dx_margin_top';
-	$dx_editor_id         = 'dx_my_editor';
-
-	// checks if the 4 fields have data stored
-	if ( ! empty( get_option( $dx_editor_id ) ) ) {
-		$dx_editor_content = ( get_option( $dx_editor_id ) );
-	} else {
-		$dx_editor_content = '';
-	}
-
-	if ( ! empty( get_option( $dx_redirect_name ) ) ) {
-		$dx_redirect_value = get_option( $dx_redirect_name );
-	} else {
-		$dx_redirect_value = '';
-	}
-
-	if ( ! empty( get_option( $dx_margin_field_name ) ) ) {
-		$dx_margin_field_value = get_option( $dx_margin_field_name );
-	} else {
-		$dx_margin_field_value = 0;
-	}
-
-	// saves data from the 5 input fields in wp_options table
-	if ( isset( $_POST[ $dx_hidden_field_name ] ) && 'Y' === $_POST[ $dx_hidden_field_name ] ) {
-		$dx_redirect_value     = esc_url( $_POST[ $dx_redirect_name ] );
-		$dx_editor_content     = sanitize_text_field( $_POST[ $dx_editor_id ] );
-		$dx_margin_field_value = esc_html( $_POST[ $dx_margin_field_name ] );
-
-		$dx_sanitized_content = sanitize_text_field( $dx_editor_content );
-
-		update_option( $dx_redirect_name, $dx_redirect_value );
-		update_option( $dx_editor_id, $dx_editor_content );
-		update_option( $dx_margin_field_name, esc_html( $dx_sanitized_margin ) );
-
-		if ( isset( $_POST['image_url'] ) ) {
-			$image_url = $_POST['image_url'];
-			update_option( 'dx-dark-site-image', $image_url );
-		}
-		?>
-		<div class="updated"><p><strong>
-			<?php
-			_e( 'Settings saved.', 'dx-dark-site' );
-			?>
-		</strong></p></div>
-		<?php
-	}
-
-	$checkbox_enable_countdown_banner_settings  = '<input type="checkbox" id="enable-countdown-banner" name="enable-countdown-banner" value="1" ' . checked( 1, get_option( 'enable-countdown-banner' ), false ) . '/>';
-	$checkbox_enable_countdown_banner_label     = '<label for="enable-countdown-banner"> Enable banner </label>';
-	$checkbox_enable_countdown_banner_settings .= $checkbox_enable_countdown_banner_label;
-
-	$checkbox_enable_redirection_settings  = '<input type="checkbox" id="enable-redirection" name="enable-redirection" value="1" ' . checked( 1, get_option( 'enable-redirection' ), false ) . '/>';
-	$checkbox_enable_redirection_label     = '<label for="enable-redirection"> Enable redirection </label>';
-	$checkbox_enable_redirection_settings .= $checkbox_enable_redirection_label;
+	$default_tab = null;
+	$tab         = isset( $_GET['tab'] ) ? $_GET['tab'] : $default_tab;
 
 	?>
-	<div class="wrap">
-		<h1><?php _e( 'DX Dark Site', 'dx-dark-site' ); ?></h1>
-		<form name="form1" method="post" action="">
+<!-- Our admin page content should all be inside .wrap -->
+<div class="wrap">
+	<!-- Print the page title -->
+	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+	<!-- Here are our tabs -->
+	<nav class="nav-tab-wrapper">
+		<a href="?page=dx-darksite-settings" class="nav-tab <?php if ( null === $tab ) : ?>
+			nav-tab-active <?php endif; ?>">Main</a>
+		<a href="?page=dx-darksite-settings&tab=redirection" class="nav-tab <?php if ( 'redirection' === $tab ) : ?>
+			nav-tab-active <?php endif; ?>">Redirection</a>
+		<a href="?page=dx-darksite-settings&tab=help" class="nav-tab <?php if ( 'help' === $tab ) : ?>
+			nav-tab-active <?php endif; ?>">Help</a>
+	</nav>
 
-			<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
-
-			<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
-				<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40"> <b><?php _e( $checkbox_enable_redirection_settings, 'dx-dark-site' ); ?></b>
-			</p><hr />
-
-			<h1 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h1>
-
-			<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
-
-			<p>
-				<?php wp_editor( wp_unslash( $dx_editor_content ), $dx_editor_id, $editor_settings ); ?>
-			</p>
-
-			<p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site' ); ?>
-				<input type="number" name="<?php echo $dx_margin_field_name; ?>" value="<?php echo $dx_margin_field_value; ?>" min=0 max=20>
-			</p>
-
-			<p>
-				<?php dx_get_uploader(); ?>
-			</p>
-
-			<p class="submit">
-				<?php submit_button( 'save', 'primary' ); ?>
-			</p>
-
-		</form>
-	</div>
-	<?php
-}
-
-function dx_darksite_redirection_call() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
-
-	$editor_settings_second_banner = array(
-		'media_buttons' => false,
-        'quicktags' => false,
-        'teeny' => true,
-	);
-
-	// set all input names as php vars
-	$dx_hidden_field_name_second_banner = 'dx_submit_hidden_second_banner';
-	$dx_redirect_name_second_banner     = 'dx_redirect_to_second_banner';
-	$dx_margin_field_name_second_banner = 'dx_margin_top_second_banner';
-	$dx_editor_id_second_banner         = 'dx_my_editor_second_banner';
-
-	// checks if the 4 fields have data stored
-	if ( ! empty( get_option( $dx_editor_id_second_banner ) ) ) {
-		$dx_editor_content_second_banner = ( get_option( $dx_editor_id_second_banner ) );
-	} else {
-		$dx_editor_content_second_banner = '';
-	}
-
-	if ( ! empty( get_option( $dx_redirect_name_second_banner ) ) ) {
-		$dx_redirect_value_second_banner = get_option( $dx_redirect_name_second_banner );
-	} else {
-		$dx_redirect_value_second_banner = '';
-	}
-
-	if ( ! empty( get_option( $dx_margin_field_name_second_banner ) ) ) {
-		$dx_margin_field_value_second_banner = get_option( $dx_margin_field_name_second_banner );
-	} else {
-		$dx_margin_field_value_second_banner = 0;
-	}
-
-	// saves data from the 5 input fields in wp_options table
-	if ( isset( $_POST[ $dx_hidden_field_name_second_banner ] ) && 'Y' === $_POST[ $dx_hidden_field_name_second_banner ] ) {
-		$dx_redirect_value_second_banner     = esc_url( $_POST[ $dx_redirect_name_second_banner ] );
-		$dx_editor_content_second_banner     = sanitize_text_field( $_POST[ $dx_editor_id_second_banner ] );
-		$dx_margin_field_value_second_banner = esc_html( $_POST[ $dx_margin_field_name_second_banner ] );
-
-		$dx_sanitized_content_second_banner = sanitize_text_field( $dx_editor_content_second_banner );
-
-		update_option( $dx_redirect_name_second_banner, $dx_redirect_value_second_banner );
-		update_option( $dx_editor_id_second_banner, $dx_editor_content_second_banner );
-		update_option( $dx_margin_field_name_second_banner, esc_html( $dx_sanitized_margin_second_banner ) );
-
-		if ( isset( $_POST['image_url_second_banner'] ) ) {
-			$image_url_second_banner = $_POST['image_url_second_banner'];
-			update_option( 'dx-dark-site-image-second-banner', $image_url_second_banner );
-		}
-
-		?>
-		<div class="updated"><p><strong>
-			<?php
-			_e( 'Settings saved.', 'dx-dark-site-redirection' );
-			?>
-		</strong></p></div>
+	<div class="tab-content">
 		<?php
-	}
-
-	$checkbox_enable_banner_settings  = '<input type="checkbox" id="enable-banner" name="enable-banner" value="1" ' . checked( 1, get_option( 'enable-banner' ), false ) . '/>';
-	$checkbox_enable_banner_label     = '<label for="enable-banner"> Enable banner </label>';
-	$checkbox_enable_banner_settings .= $checkbox_enable_banner_label;
-
-	?>
-	<div class="wrap">
-		<h1><?php _e( 'Redirection Banner', 'dx-dark-site-redirection' ); ?></h1>
-		<form name="form1" method="post" action="">
-
-			<input type="hidden" name="<?php echo $dx_hidden_field_name_second_banner; ?>" value="Y">
-
-			<h1 class="description"><?php _e( $checkbox_enable_banner_settings, 'dx-dark-site' ); ?></h1>
-
-			<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
-				<input type="text" required name="<?php echo $dx_redirect_name_second_banner; ?>" value="<?php echo $dx_redirect_value_second_banner; ?>" size="40">
-			</p><hr />
-
-			<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
-			
-			<p>
-				<?php wp_editor( wp_unslash( $dx_editor_content_second_banner ), $dx_editor_id_second_banner, $editor_settings_second_banner ); ?>
-			</p>
-
-			<p> <?php _e( 'Margin from top (in rem Units) :', 'dx-dark-site-redirection' ); ?>
-				<input type="number" name="<?php echo $dx_margin_field_name_second_banner; ?>" value="<?php echo $dx_margin_field_value_second_banner; ?>" min=0 max=20>
-			</p>
-
-			<p>
-				<?php dx_get_uploader(); ?>
-			</p>
-
-			<p class="submit">
-				<?php submit_button( 'save', 'primary' ); ?>
-			</p>
-
-		</form>
+		switch ( $tab ) :
+			case 'redirection':
+				include( 'dx-redirection-banner.php' );
+				break;
+			case 'help':
+				include( 'dx-dark-site-help-page.php' );
+				break;
+			default:
+				include( 'dx-main.php' );
+				break;
+		endswitch;
+		?>
 	</div>
+</div>
 	<?php
 }
