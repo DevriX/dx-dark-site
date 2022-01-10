@@ -88,7 +88,8 @@ function dx_settings_page() {
 
 	$editor_settings = array(
 		'media_buttons' => false,
-		'teeny'         => true,
+        'quicktags' => false,
+        'teeny' => true,
 	);
 
 	// set all input names as php vars
@@ -192,7 +193,8 @@ function dx_darksite_redirection_call() {
 
 	$editor_settings_second_banner = array(
 		'media_buttons' => false,
-		'teeny'         => true,
+        'quicktags' => false,
+        'teeny' => true,
 	);
 
 	// set all input names as php vars
