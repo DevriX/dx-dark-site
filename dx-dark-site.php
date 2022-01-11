@@ -24,9 +24,70 @@ $option_redirection      = get_option( 'enable-redirection' );
 */
 if ( '1' === $option_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice_redirection_banner' );
+	add_shortcode( 'counter', 'dx_add_counter_shortcode' );
+
+	function shortocde_handle( $atts ) {
+		?>
+		<script type="text/javascript">
+			var timeleft = <?php echo $atts; ?>;
+			var downloadTimer = setInterval(function(){
+				if(timeleft <= 0){
+					clearInterval(downloadTimer);
+					document.getElementById("countdown").innerHTML = "Redirecting Now";
+					window.location.href = "<?php echo get_option( 'dx_redirect_to_second_banner' ); ?>";
+				} else {
+					document.getElementById("countdown").innerHTML = timeleft + " seconds";
+				}
+					timeleft -= 1;
+				}, 1000);
+		</script>
+		<?php
+		return '<b id="countdown"></b>';
+	}
 }
+
 if ( '1' === $option_countdown_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice' );
+	add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
+
+	function global_counter_shortocde_handle( $atts ) {
+		?>
+		<script>
+		var countDownDate = new Date("<?php echo $atts; ?>").getTime();
+
+		var x = setInterval(function() {
+
+		var now = new Date().getTime();
+		var distance = countDownDate - now;
+
+		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		if ( days > 0 ) {
+			document.getElementById("counter").innerHTML = days + " days " + hours + " hours "
+			+ minutes + " minutes " + seconds + " seconds";
+		}
+		else if ( days == 0 && hours !== 0 ){
+			document.getElementById("counter").innerHTML = hours + " hours "
+			+ minutes + " minutes " + seconds + " seconds";
+		}
+		else if( days == 0 && hours == 0 && minutes !== 0 ) {
+			document.getElementById("counter").innerHTML = minutes + " minutes " + seconds + " seconds";
+		}
+		else if( days == 0 && hours == 0 && minutes == 0 ) {
+			document.getElementById("counter").innerHTML = seconds + " seconds";
+		}
+		else {
+			var element_banner = document.getElementById('darksite-banner');
+			element_banner.remove();
+		}
+
+		}, 1000);
+		</script>
+		<?php
+		return '<b id="counter"></b>';
+	}
 }
 if ( '1' === $option_redirection ) {
 	add_action( 'template_redirect', 'dx_darksite_redirect' );
@@ -72,8 +133,6 @@ function dx_darksite_notice() {
 			} else {
 				$dx_margin_top = 0;
 			}
-			$dx_editor_content    = get_option( 'dx_my_editor' );
-			$dx_unslashed_content = wp_unslash( $dx_editor_content );
 
 			$dx_editor_content = get_option( 'dx_my_editor' );
 			$dx_date           = get_option( 'dx_date' );
@@ -149,8 +208,6 @@ function dx_darksite_notice_redirection_banner() {
 			} else {
 				$dx_margin_top_second_banner = 0;
 			}
-			$dx_editor_content_second_banner    = get_option( 'dx_my_editor_second_banner' );
-			$dx_unslashed_content_second_banner = wp_unslash( $dx_editor_content_second_banner );
 
 			$dx_editor_content_second_banner = get_option( 'dx_my_editor_second_banner' );
 			$dx_date_second_banner           = get_option( 'dx_date_second_banner' );
@@ -164,7 +221,7 @@ function dx_darksite_notice_redirection_banner() {
 			$dx_time_kses_second_banner = wp_kses_data( $dx_unslashed_time_second_banner );
 			$dx_date_time_second_banner = $dx_date_kses_second_banner . ' ' . $dx_time_kses_second_banner;
 			$dx_content_second_banner   = wp_kses_data( $dx_unslashed_content_second_banner );
-
+			
 			$expiry_date_second_banner  = strtotime( $dx_date_time_second_banner );
 			$current_date_second_banner = strtotime( gmdate( 'Y-m-d h:i:s' ) );
 			?>
@@ -242,7 +299,6 @@ function dx_add_counter_shortcode( $atts ) {
 
 	return shortocde_handle( $attributes['seconds'] );
 }
-add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 
 /**
  * Global Counter Shortcode
@@ -257,65 +313,6 @@ function dx_add_global_counter_shortcode( $atts ) {
 	);
 
 	return global_counter_shortocde_handle( $attributes['time'] );
-}
-add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
-
-function shortocde_handle( $atts ) {
-	?>
-	<script type="text/javascript">
-		var timeleft = <?php echo $atts; ?>;
-		var downloadTimer = setInterval(function(){
-			if(timeleft <= 0){
-				clearInterval(downloadTimer);
-				document.getElementById("countdown").innerHTML = "Redirecting Now";
-				window.location.href = "<?php echo get_option( 'dx_redirect_to_second_banner' ); ?>";
-			} else {
-				document.getElementById("countdown").innerHTML = timeleft + " seconds";
-			}
-				timeleft -= 1;
-			}, 1000);
-	</script>
-	<?php
-	return '<b id="countdown"></b>';
-}
-
-function global_counter_shortocde_handle( $atts ) {
-	?>
-	<script>
-	var countDownDate = new Date("<?php echo $atts; ?>").getTime();
-
-	var x = setInterval(function() {
-
-	var now = new Date().getTime();
-	var distance = countDownDate - now;
-
-	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	if ( days > 0 ) {
-		document.getElementById("counter").innerHTML = days + " days " + hours + " hours "
-		+ minutes + " minutes " + seconds + " seconds";
-	}
-	else if ( days == 0 && hours !== 0 ){
-		document.getElementById("counter").innerHTML = hours + " hours "
-		+ minutes + " minutes " + seconds + " seconds";
-	}
-	else if( days == 0 && hours == 0 && minutes !== 0 ) {
-		document.getElementById("counter").innerHTML = minutes + " minutes " + seconds + " seconds";
-	}
-	else if( days == 0 && hours == 0 && minutes == 0 ) {
-		document.getElementById("counter").innerHTML = seconds + " seconds";
-	}
-	else {
-		var element_banner = document.getElementById('darksite-banner');
-		element_banner.remove();
-	}
-
-	}, 1000);
-	</script>
-	<?php
-	return '<b id="counter"></b>';
 }
 
 add_action( 'wp_ajax_add_to_base', 'add_to_base' );
