@@ -85,9 +85,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 			<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
 				<input type="text" required name="<?php echo $dx_redirect_name_second_banner; ?>" value="<?php echo $dx_redirect_value_second_banner; ?>" size="40">
 			</p><hr />
-
-			<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
-
+			
 			<p><?php _e( 'Seconds:', 'dx-dark-site-redirection' ); ?>
 				<input type="text" required name="<?php echo $dx_seconds_name_second_banner; ?>" value="<?php echo $dx_seconds_value_second_banner; ?>" size="10">
 			</p><hr />

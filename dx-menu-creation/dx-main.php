@@ -98,8 +98,6 @@ $checkbox_enable_countdown_banner_settings .= $checkbox_enable_countdown_banner_
 
 	<h2 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h2>
 
-	<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
-
 	<p><?php _e("Expiry Date:", 'dx-dark-site' ); ?>
 		<input type="date" name="<?php echo $dx_date_name; ?>" value="<?php echo $dx_date_value; ?>">
 	</p><hr />
