@@ -218,22 +218,11 @@ function dx_darksite_notice_redirection_banner() {
 			}
 
 			$dx_editor_content_second_banner = get_option( 'dx_my_editor_second_banner' );
-			$dx_date_second_banner           = get_option( 'dx_date_second_banner' );
-			$dx_time_second_banner           = get_option( 'dx_time_second_banner' );
 
 			$dx_unslashed_content_second_banner = wp_unslash( $dx_editor_content_second_banner );
-			$dx_unslashed_date_second_banner    = wp_unslash( $dx_date_second_banner );
-			$dx_unslashed_time_second_banner    = wp_unslash( $dx_time_second_banner );
 
-			$dx_date_kses_second_banner = wp_kses_data( $dx_unslashed_date_second_banner );
-			$dx_time_kses_second_banner = wp_kses_data( $dx_unslashed_time_second_banner );
-			$dx_date_time_second_banner = $dx_date_kses_second_banner . ' ' . $dx_time_kses_second_banner;
 			$dx_content_second_banner   = wp_kses_data( $dx_unslashed_content_second_banner );
-			
-			$expiry_date_second_banner  = strtotime( $dx_date_time_second_banner );
-			$current_date_second_banner = strtotime( gmdate( 'Y-m-d h:i:s' ) );
 			?>
-			<?php if ( $expiry_date_second_banner >= $current_date_second_banner ) : ?>
 			<div id="darksite-banner" class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
@@ -243,7 +232,6 @@ function dx_darksite_notice_redirection_banner() {
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div><!-- .darksite-notice-container -->
 			</div><!-- .darksite-notice -->
-			<?php endif; ?>
 
 			<style type="text/css">
 				.darksite-notice { margin-top: <?php echo $dx_margin_top_second_banner; ?>rem; }
