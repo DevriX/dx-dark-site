@@ -9,11 +9,11 @@ $(document).ready(function($) {
             $('#enable-banner').val( 1 );
             var ajax_field_value = $('#enable-banner').val();
 
-            $.post( ajaxurl, { data: { "enable-banner" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-banner" : ajax_field_value }, action: "add_to_base_dxds" } );
 
-			$.post( ajaxurl, { data: { "enable-countdown-banner" : 0 }, action: "add_to_base" } );
+			$.post( ajaxurl, { data: { "enable-countdown-banner" : 0 }, action: "add_to_base_dxds" } );
 
-			$.post( ajaxurl, { data: { "enable-redirection" : 0 }, action: "add_to_base" } );
+			$.post( ajaxurl, { data: { "enable-redirection" : 0 }, action: "add_to_base_dxds" } );
 
         } else {
             alert("Redirection banner is disabled.");
@@ -21,7 +21,7 @@ $(document).ready(function($) {
             $('#enable-banner').val( 0 );
             var ajax_field_value = $('#enable-banner').val();
 
-            $.post( ajaxurl, { data: { "enable-banner" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-banner" : ajax_field_value }, action: "add_to_base_dxds" } );
         }
     });
 
@@ -36,11 +36,11 @@ $(document).ready(function($) {
             $('#enable-countdown-banner').val( 1 );
             var ajax_field_value = $('#enable-countdown-banner').val();
 
-            $.post( ajaxurl, { data: { "enable-countdown-banner" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-countdown-banner" : ajax_field_value }, action: "add_to_base_dxds" } );
 
-			$.post( ajaxurl, { data: { "enable-banner" : 0 }, action: "add_to_base" } );
+			$.post( ajaxurl, { data: { "enable-banner" : 0 }, action: "add_to_base_dxds" } );
 
-			$.post( ajaxurl, { data: { "enable-redirection" : 0 }, action: "add_to_base" } );
+			$.post( ajaxurl, { data: { "enable-redirection" : 0 }, action: "add_to_base_dxds" } );
 
 			window.setTimeout( function(){
 				location.reload();
@@ -52,7 +52,7 @@ $(document).ready(function($) {
             $('#enable-countdown-banner').val( 0 );
             var ajax_field_value = $('#enable-countdown-banner').val();
 
-            $.post( ajaxurl, { data: { "enable-countdown-banner" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-countdown-banner" : ajax_field_value }, action: "add_to_base_dxds" } );
         }
     });
 
@@ -67,11 +67,11 @@ $(document).ready(function($) {
             $('#enable-redirection').val( 1 );
             var ajax_field_value = $('#enable-redirection').val();
 
-            $.post( ajaxurl, { data: { "enable-redirection" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-redirection" : ajax_field_value }, action: "add_to_base_dxds" } );
 
-			$.post( ajaxurl, { data: { "enable-countdown-banner" : 0 }, action: "add_to_base" } );
+			$.post( ajaxurl, { data: { "enable-countdown-banner" : 0 }, action: "add_to_base_dxds" } );
 
-			$.post( ajaxurl, { data: { "enable-banner" : 0 }, action: "add_to_base" } );
+			$.post( ajaxurl, { data: { "enable-banner" : 0 }, action: "add_to_base_dxds" } );
 
 			window.setTimeout( function(){
 				location.reload();
@@ -83,7 +83,7 @@ $(document).ready(function($) {
             $('#enable-redirection').val( 0 );
             var ajax_field_value = $('#enable-redirection').val();
 
-            $.post( ajaxurl, { data: { "enable-redirection" : ajax_field_value }, action: "add_to_base" } );
+            $.post( ajaxurl, { data: { "enable-redirection" : ajax_field_value }, action: "add_to_base_dxds" } );
         }
     });
 
