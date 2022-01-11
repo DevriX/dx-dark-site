@@ -22,7 +22,10 @@ $option_redirection      = get_option( 'enable-redirection' );
 /**
 * if checked hooked the functions
 */
-if ( '1' === $option_banner ) {
+$dx_editor_content_second_banner    = get_option( 'dx_my_editor_second_banner' );
+$dx_unslashed_content_second_banner = wp_unslash( $dx_editor_content_second_banner );
+$dx_content_second_banner           = wp_kses_data( $dx_unslashed_content_second_banner );
+if ( '1' === $option_banner && strpos( $dx_content_second_banner, '[counter seconds' ) !== false ) {
 	add_action( 'wp_head', 'dx_darksite_notice_redirection_banner' );
 	add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 
@@ -46,7 +49,10 @@ if ( '1' === $option_banner ) {
 	}
 }
 
-if ( '1' === $option_countdown_banner ) {
+$dx_editor_content    = get_option( 'dx_my_editor' );
+$dx_unslashed_content = wp_unslash( $dx_editor_content );
+$dx_content           = wp_kses_data( $dx_unslashed_content );
+if ( '1' === $option_countdown_banner && strpos( $dx_content, '[global-counter time' ) !== false ) {
 	add_action( 'wp_head', 'dx_darksite_notice' );
 	add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
 
