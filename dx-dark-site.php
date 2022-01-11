@@ -311,7 +311,6 @@ function dx_add_counter_shortcode( $atts ) {
 /**
  * Global Counter Shortcode
  */
-var_dump(get_option( 'dx_date' ) . ' ' . get_option( 'dx_time' ));
 function dx_add_global_counter_shortcode( $atts ) {
 
 	$attributes = shortcode_atts(
