@@ -11,6 +11,8 @@ $editor_settings = array(
 // set all input names as php vars
 $dx_hidden_field_name = 'dx_submit_hidden';
 $dx_redirect_name     = 'dx_redirect_to';
+$dx_date_name         = 'dx_date';
+$dx_time_name         = 'dx_time';
 $dx_margin_field_name = 'dx_margin_top';
 $dx_editor_id         = 'dx_my_editor';
 
@@ -27,6 +29,18 @@ if ( ! empty( get_option( $dx_redirect_name ) ) ) {
 	$dx_redirect_value = '';
 }
 
+if ( ! empty( get_option( $dx_date_name ) ) ) {
+	$dx_date_value = get_option( $dx_date_name );
+} else {
+	$dx_date_value = '';
+}
+
+if ( ! empty( get_option( $dx_time_name ) ) ) {
+	$dx_time_value = get_option( $dx_time_name );
+} else {
+	$dx_time_value = '';
+}
+
 if ( ! empty( get_option( $dx_margin_field_name ) ) ) {
 	$dx_margin_field_value = get_option( $dx_margin_field_name );
 } else {
@@ -36,13 +50,15 @@ if ( ! empty( get_option( $dx_margin_field_name ) ) ) {
 // saves data from the input fields in wp_options table
 if ( isset( $_POST[ $dx_hidden_field_name ] ) && 'Y' === $_POST[ $dx_hidden_field_name ] ) {
 	$dx_editor_content     = sanitize_text_field( $_POST[ $dx_editor_id ] );
-	$dx_redirect_value = esc_url( $_POST[ $dx_redirect_name ] );
-
+	$dx_redirect_value     = esc_url( $_POST[ $dx_redirect_name ] );
+	$dx_date_value         = $_POST[ $dx_date_name ];
+	$dx_time_value         = $_POST[ $dx_time_name ];
 	$dx_margin_field_value = esc_html( $_POST[ $dx_margin_field_name ] );
-
-	$dx_sanitized_content = sanitize_text_field( $dx_editor_content );
+	$dx_sanitized_content  = sanitize_text_field( $dx_editor_content );
 
 	update_option( $dx_redirect_name, $dx_redirect_value );
+	update_option( $dx_date_name, $dx_date_value );
+	update_option( $dx_time_name, $dx_time_value );
 	update_option( $dx_editor_id, $dx_editor_content );
 	update_option( $dx_margin_field_name, esc_html( $dx_sanitized_margin ) );
 
@@ -83,6 +99,14 @@ $checkbox_enable_countdown_banner_settings .= $checkbox_enable_countdown_banner_
 	<h2 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h2>
 
 	<h3> <?php _e( 'BANNER', 'dx-dark-site' ); ?></h3>
+
+	<p><?php _e("Expiry Date:", 'dx-dark-site' ); ?>
+		<input type="date" name="<?php echo $dx_date_name; ?>" value="<?php echo $dx_date_value; ?>">
+	</p><hr />
+
+	<p><?php _e("Expiry Time:", 'dx-dark-site' ); ?>
+		<input type="time" step=1 name="<?php echo $dx_time_name; ?>" value="<?php echo $dx_time_value; ?>">
+	</p><hr />
 
 	<p>
 		<?php wp_editor( wp_unslash( $dx_editor_content ), $dx_editor_id, $editor_settings ); ?>

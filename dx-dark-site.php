@@ -22,10 +22,7 @@ $option_redirection      = get_option( 'enable-redirection' );
 /**
 * if checked hooked the functions
 */
-$dx_editor_content_second_banner    = get_option( 'dx_my_editor_second_banner' );
-$dx_unslashed_content_second_banner = wp_unslash( $dx_editor_content_second_banner );
-$dx_content_second_banner           = wp_kses_data( $dx_unslashed_content_second_banner );
-if ( '1' === $option_banner && strpos( $dx_content_second_banner, '[counter seconds' ) !== false ) {
+if ( '1' === $option_banner && strpos( get_option( 'dx_my_editor_second_banner' ), '[counter' ) !== false ) {
 	add_action( 'wp_head', 'dx_darksite_notice_redirection_banner' );
 	add_shortcode( 'counter', 'dx_add_counter_shortcode' );
 
@@ -49,10 +46,7 @@ if ( '1' === $option_banner && strpos( $dx_content_second_banner, '[counter seco
 	}
 }
 
-$dx_editor_content    = get_option( 'dx_my_editor' );
-$dx_unslashed_content = wp_unslash( $dx_editor_content );
-$dx_content           = wp_kses_data( $dx_unslashed_content );
-if ( '1' === $option_countdown_banner && strpos( $dx_content, '[global-counter time' ) !== false ) {
+if ( '1' === $option_countdown_banner && strpos( get_option( 'dx_my_editor' ), '[global-counter' ) !== false ) {
 	add_action( 'wp_head', 'dx_darksite_notice' );
 	add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
 
@@ -155,6 +149,14 @@ function dx_darksite_notice() {
 
 			$expiry_date  = strtotime( $dx_date_time );
 			$current_date = strtotime( gmdate( 'Y-m-d h:i:s' ) );
+
+			$diff    = abs( $expiry_date - $current_date );
+			$years   = floor( $diff / ( 365 * 60 * 60 * 24 ) );
+			$months  = floor( ( $diff - $years * 365 * 60 * 60 * 24 ) / ( 30 * 60 * 60 * 24 ) );
+			$days    = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 ) / ( 60 * 60 * 24 ) );
+			$hours   = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 ) / ( 60 * 60 ) );
+			$minutes = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 ) / 60 );
+			$seconds = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 - $minutes * 60 ) );
 			?>
 			<?php if ( $expiry_date >= $current_date ) : ?>
 			<div id="darksite-banner" class="darksite-notice">
@@ -298,7 +300,7 @@ function dx_add_counter_shortcode( $atts ) {
 
 	$attributes = shortcode_atts(
 		array(
-			'seconds' => '5',
+			'seconds' => get_option('dx_seconds_to_second_banner'),
 		),
 		$atts
 	);
@@ -309,11 +311,12 @@ function dx_add_counter_shortcode( $atts ) {
 /**
  * Global Counter Shortcode
  */
+var_dump(get_option( 'dx_date' ) . ' ' . get_option( 'dx_time' ));
 function dx_add_global_counter_shortcode( $atts ) {
 
 	$attributes = shortcode_atts(
 		array(
-			'time' => 'January 2 2022 10:10:10',
+			'time' => get_option( 'dx_date' ) . ' ' . get_option( 'dx_time' ),
 		),
 		$atts
 	);

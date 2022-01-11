@@ -12,6 +12,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 	// set all input names as php vars
 	$dx_hidden_field_name_second_banner = 'dx_submit_hidden_second_banner';
 	$dx_redirect_name_second_banner     = 'dx_redirect_to_second_banner';
+	$dx_seconds_name_second_banner      = 'dx_seconds_to_second_banner';
 	$dx_margin_field_name_second_banner = 'dx_margin_top_second_banner';
 	$dx_editor_id_second_banner         = 'dx_my_editor_second_banner';
 
@@ -28,6 +29,12 @@ if ( ! current_user_can( 'manage_options' ) ) {
 		$dx_redirect_value_second_banner = '';
 	}
 
+	if ( ! empty( get_option( $dx_seconds_name_second_banner ) ) ) {
+		$dx_seconds_value_second_banner = get_option( $dx_seconds_name_second_banner );
+	} else {
+		$dx_seconds_value_second_banner = '';
+	}
+
 	if ( ! empty( get_option( $dx_margin_field_name_second_banner ) ) ) {
 		$dx_margin_field_value_second_banner = get_option( $dx_margin_field_name_second_banner );
 	} else {
@@ -37,12 +44,14 @@ if ( ! current_user_can( 'manage_options' ) ) {
 	// saves data from the 5 input fields in wp_options table
 	if ( isset( $_POST[ $dx_hidden_field_name_second_banner ] ) && 'Y' === $_POST[ $dx_hidden_field_name_second_banner ] ) {
 		$dx_redirect_value_second_banner     = esc_url( $_POST[ $dx_redirect_name_second_banner ] );
+		$dx_seconds_value_second_banner      = sanitize_text_field( $_POST[ $dx_seconds_name_second_banner ] );
 		$dx_editor_content_second_banner     = sanitize_text_field( $_POST[ $dx_editor_id_second_banner ] );
 		$dx_margin_field_value_second_banner = esc_html( $_POST[ $dx_margin_field_name_second_banner ] );
 
 		$dx_sanitized_content_second_banner = sanitize_text_field( $dx_editor_content_second_banner );
 
 		update_option( $dx_redirect_name_second_banner, $dx_redirect_value_second_banner );
+		update_option( $dx_seconds_name_second_banner, $dx_seconds_value_second_banner );
 		update_option( $dx_editor_id_second_banner, $dx_editor_content_second_banner );
 		update_option( $dx_margin_field_name_second_banner, esc_html( $dx_sanitized_margin_second_banner ) );
 
@@ -78,6 +87,10 @@ if ( ! current_user_can( 'manage_options' ) ) {
 			</p><hr />
 
 			<h3> <?php _e( 'BANNER', 'dx-dark-site-redirection' ); ?></h3>
+
+			<p><?php _e( 'Seconds:', 'dx-dark-site-redirection' ); ?>
+				<input type="text" required name="<?php echo $dx_seconds_name_second_banner; ?>" value="<?php echo $dx_seconds_value_second_banner; ?>" size="10">
+			</p><hr />
 
 			<p>
 				<?php wp_editor( wp_unslash( $dx_editor_content_second_banner ), $dx_editor_id_second_banner, $editor_settings_second_banner ); ?>
