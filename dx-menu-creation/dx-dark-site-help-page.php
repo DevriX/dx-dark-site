@@ -67,70 +67,73 @@
 				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image1.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<p>
-					Type in your title, and list down all of your services. Each
-					service is identified by title and a cost per item. You can add an
-					unlimited number of fields for your form.
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>/add-new-service.png" alt="add new service" />
+					By default you are on the first tab - <b>Main</b>, this tab contains the settings for <b>Plugin feature #1</b> and <b>Plugin feature #2</b>:
 				</p>
+
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image2.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<p>
-					So far, so good! Now, let's add the following form to a page:
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>/offer-calc-in-page.png" alt="offer calc in page" />
+					In the first section <b>DX Dark Site Redirection</b>, you will find a redirection field(*1), which when added URL 
+					to it will redirect the whole site to the URL for all non-logged users and checkbox(*2), which will enable/disable 
+					the feature functionality. For example, a pre-created page that informs the user that the site is under construction
+					or down. After finnish with the settings click the <b>Save</b> button at the bottom of the page. Make sure the redirection is enabled.
 				</p>
 
-				<p>That's right - our <em>[ofc_shortcode offer_slug="your-offer-slug-here"]</em> shortcode would embed your form accordingly. 
-				You can place it on the top of the page, or you could style it through the HTML editor, 
-				or wrap some text around it, it's up to you.</p>
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image3.png'; ?>" alt="" style="border: 5px solid #555"/>
+
+				<p>The second section in the <b>Main</b> tab - <b>DX Countdown Banner</b> contains more elements. The first one - checkbox(*1)
+			 	for enabling/disabling the banner functionality, followed by date(*2) and time(*3) pickers,the fourth is а WordPress editor(*4),
+				where to add the custom content and the shortcode, the next is input field(*5) for setting margin top from 0-20 and the last one is upload button(*6) for custom image
+				uploading.
+				</p>
+
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image4.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<p>
-					The unique code for your form is available in the <strong>All Offer Calc</strong> listing:
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>images/screenshot-2.png" alt="all offer calc shortcodes" />
+					How to work with the shortcode for the DX Countdown banner:
+					<li>In the text area insert custom text message and on the position you want to be the countdown timer - add
+					<code>[global-counter]</code>. For example "Sorry, our payment systems are not working at the moment.
+					Check again after [global-counter]. Thank you!"</li>
+					<li>Make sure you have selected <b>Expiry date</b> and <b>Expiry time</b>, or the banner will not be visible.</li>
+					<li>After added the setting click on the <b>Save</b> button.</li>
 				</p>
+
+				<p>Back-end settings:</p>
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image5.png'; ?>" alt="" style="border: 5px solid #555"/>
+
+				<p>Front-end view:</p>
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image6.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<p>
-					or in <strong>Single Offer</strong> view:<br/>
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>images/screenshot-1.png" alt="single offer calc shortcodes" />
+					In the second tab - <b>Redirection</b> you will find the settings for <b>Plugin feature #3</b>.
+					<br>
+					The first element on the page - checkbox(*1) for enabling/disabling the banner functionality, followed by input field(*2)
+					for redirection URL, where the user will be redirected after time expires, input field(*3) for seconds before redirection,
+					the fourth is а WordPress editor(*4), where to add the custom content and the shortcode, the next is input field(*5) for
+					setting margin top from 0-20 and the last one is upload button(*6) for custom image uploading.
 				</p>
 
-
-				<p>Did we mention that you could add several forms to your site as well? Yes, you could! You could create a bunch of pages 
-				with different forms, different services and costs. Whether it's related to different products or services, or you want 
-				a hidden page with discounted prices - it's up to you, it's all possible here!</p>
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image7.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<p>
-					Additionally, you could place your form in the sidebar from the widget section, just navigate to 
-					<strong>Appearance</strong> -> <strong>Widgets</strong> and drag your <strong>Offer Calc Widget</strong> to the desired widget area. <br/>
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>/offer-calc-widgets.png" alt="offer calc widgets"/>
+					How to work with the shortcode for the DX Redirection banner:
+					<li>In the text area insert custom text message and on the position you want to be the countdown timer - add
+					<code>[counter]</code>. For example "You will be redirected after [counter]".</li>
+					<li>Make sure you have selected enabled the banner from the checkbox, or the banner will not be visible.</li>
+					<li>After added the setting click on the <b>Save</b> button.</li>
 				</p>
 
-				<p>And that's a sample page with a form on a random page.</p>
+				<p>Back-end settings:</p>
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image8.png'; ?>" alt="" style="border: 5px solid #555"/>
 
-				<p>
-				Our beta <a href="<?php //echo OFFER_CALC_PRO_SITE_URL; ?>" title="Offer Calc" target="_blank">premium version</a> includes a number of awesome features, 
-				including:
-				</p>
-
-				<ul>
-					<li>email the form inquiry to you</li>
-					<li>store each inquiry in the WordPress admin area</li>
-					<li>automatically pay for the required service</li>
-					<li>sign up each inquiry to your mailing list</li>
-				</ul>
-
+				<p>Front-end view:</p>
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image9.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<div class="dx-help-footer">
 					<h3>And much more</h3>
 
-					<p>Follow us on <a href="https://twitter.com/wpdevrix" target="_blank">Twitter</a> and <a href="https://www.facebook.com/DevriXShop/" target="_blank">Facebook</a></p>
-					<p class="info-bar"><em>Check out our <a href="https://wordpress.org/support/plugin/offer-calc" target="_blank">Support forum</a> if you need help or if you have any questions about the plugin</em></p>
-
-					<footer class='dx-footer'>
-						<div class="signup-banner">
-							<a href="http://devrix.com/shop/subscribe/" target="_blank">
-								<img class='footer-banner' src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/dx-help-banner.png'; ?>" alt="WordPress help">
-							</a>
-						</div>
-					</footer>
+					<p>Follow us on <a href="https://twitter.com/wpdevrix" target="_blank">Twitter</a> and <a href="https://www.facebook.com/DevriXLtd/" target="_blank">Facebook</a></p>
+					<p class="info-bar"><em>Check out our <a href="https://wordpress.org/support/plugin/devrix-dark-site/" target="_blank">Support forum</a> if you need help or if you have any questions about the plugin</em></p>
 				</div><!-- .dx-help-footer -->
 
 			</div><!-- .main-content -->
