@@ -12,7 +12,7 @@
  *
  */
 function dx_add_menu_page() {
-	add_menu_page( __( 'DX Dark Site', 'dx-dark-site' ), __( 'DX Dark Site', 'dx-dark-site' ), 'manage_options', 'dx-darksite-settings', 'dx_settings_page' );
+	add_menu_page( __( 'DX Dark Site', 'dx-dark-site' ), __( 'DX Dark Site', 'dx-dark-site' ), 'manage_options', 'dx-darksite-settings', 'dx_settings_page', 'dashicons-clock' );
 }
 add_action( 'admin_menu', 'dx_add_menu_page' );
 

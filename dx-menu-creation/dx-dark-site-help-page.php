@@ -3,7 +3,7 @@
 		<h2 class="logo"><img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/devrix-logo-white.svg'; ?>" alt="" /></h2><!-- .logo -->
 		<div class="page-info">
 			<h3 class="page-title">Documentation</h3><!-- .page-title -->
-			<h4 class="page-subtitle">DX Delete Attached Media</h4><!-- .page-subtitlr -->
+			<h4 class="page-subtitle">DX Dark Site</h4><!-- .page-subtitlr -->
 		</div><!-- .info -->
 	</header><!-- .help-header -->
 
@@ -11,45 +11,60 @@
 
 		<div class="panel-content">
 			<heading class="help-heading">
-				<h1 class="help-title">Welcome to DX Delete Attached Media help page</h1><!-- .help-title -->
-				<p class="help-subtitle">DX Delete Attached Media is a simple plugin deleting your media after it is not used anymore...</p><!-- .help-subtitle -->
+				<h1 class="help-title">Welcome to <b>DX Dark Site</b> help page</h1><!-- .help-title -->
+				<p class="help-subtitle"><b>DX Dark Site</b> is a simple plugin used for redirections or displaying banner with informational messages...</p><!-- .help-subtitle -->
 			</heading><!-- .help-heading -->
 
 			<div class="featured-columns">
 				<div class="column">
 					<div class="inner red">
 						<h2 class="column-title">What is this plugin?</h2><!-- .column-titlr -->
-						<p>DX Delete Attached Media deletes all of the attached media files to your posts once they get deleted from the system. The standard core behavior deletes posts alone without taking care of related images.</p>
+						<p>Unfortunately, sometimes features of a site are not working propperly- pages are not loading, payment systems are not working, etc.
+						We created this plugin with the idea of dealing with emergencies on the site, by keeping your site private to logged users or informing
+						the visitors that the site is not fully functional.</p>
 					</div><!-- .inner -->
 				</div><!-- .column -->
 
 				<div class="column">
 					<div class="inner blue">
-						<h2 class="column-title">What will change?</h2><!-- .column-titlr -->
-						<p>Now you can maintain your install and get rid of all solo attachments getting into your posts via the Media button and used nowhere else.</p>
+						<h2 class="column-title">Plugin feature #1</h2><!-- .column-titlr -->
+						<p>A redirection field, which when added URL to it will redirect the whole site to the URL for all non-logged users. For example,
+						a pre-created page that informs the user that the site is under construction or down.</p>
 					</div><!-- .inner -->
 				</div><!-- .column -->
 
 				<div class="column">
 					<div class="inner green">
-						<h2 class="column-title">Does it work for custom post types?</h2><!-- .column-titlr -->
-						<p>Yes, as long as you attach images via the Media button, they are going to be deleted once the post/post type entry is deleted.</p>
+						<h2 class="column-title">Plugin feature #2</h2><!-- .column-titlr -->
+						<p>A WordPress editor, which renders a bar over the whole site in the header. The bar can have custom content in it or/and a shortcode
+						with a countdown timmer. This is added with the idea of informing the visitors that something is not working properly. For example 
+						“Sorry, our payment systems are not working for the next [here is the countdown timer]”.</p>
 					</div><!-- .inner -->
 				</div><!-- .column -->
+
+				<div class="column">
+					<div class="inner orange">
+						<h2 class="column-title">Plugin feature #3</h2><!-- .column-titlr -->
+						<p>A WordPress editor, which renders a bar over the whole site in the header. The bar can have custom content in it and a shortcode
+						with a countdown timmer for redirection. This is added with the idea of informing the visitors that something will happen after the time expires. For example 
+						“Sorry, the service is not available right now, you will be redirected to support page after 30 seconds[it is countdown]”.</p>
+					</div><!-- .inner -->
+				</div><!-- .column -->
+
 			</div><!-- .three-columns -->
 
 			<div class="main-content">
-				<h2>More information about DX Delete Attached Media</h2>
+				<h2>More information about DX Dark Site</h2>
 				<p>
-					Our plugin<strong> DX Delete Attached Media </strong> will help you to get rid of all solo attachments
-					getting into your posts via the Media button and used nowhere else. Also it will help you to see in
-					which posts is used each media file.
+					Our plugin<strong> DX Dark Site </strong> will help you to deal with emergencies on the site, by 
+					keeping your site private to logged users, inform the visitors that the site is not fully functional, display notifications
+					with countdown banner or redirection banner.
 				</p>
 				<p>
-					You can check the used and unused media in the plugin admin page. Navigate to the "<strong>DX Delete Attached Media</strong>" page:
-					<img src="<?php echo plugins_url( 'img', __FILE__ ); ?>/add-new-offer.png" alt="add new offer" />
+					Navigate to the "<strong>DX Dark Site</strong>" page:
 				</p>
 
+				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image1.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<p>
 					Type in your title, and list down all of your services. Each
