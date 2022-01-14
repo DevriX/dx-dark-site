@@ -49,6 +49,8 @@ if ( ! current_user_can( 'manage_options' ) ) {
 		$dx_margin_field_value_second_banner = esc_html( $_POST[ $dx_margin_field_name_second_banner ] );
 
 		$dx_sanitized_content_second_banner = sanitize_text_field( $dx_editor_content_second_banner );
+		$dx_sanitized_margin_second_banner = esc_html( absint( $dx_margin_field_value_second_banner ) );
+
 
 		update_option( $dx_redirect_name_second_banner, $dx_redirect_value_second_banner );
 		update_option( $dx_seconds_name_second_banner, $dx_seconds_value_second_banner );

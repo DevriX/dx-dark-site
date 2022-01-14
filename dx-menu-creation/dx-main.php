@@ -55,6 +55,7 @@ if ( isset( $_POST[ $dx_hidden_field_name ] ) && 'Y' === $_POST[ $dx_hidden_fiel
 	$dx_time_value         = $_POST[ $dx_time_name ];
 	$dx_margin_field_value = esc_html( $_POST[ $dx_margin_field_name ] );
 	$dx_sanitized_content  = sanitize_text_field( $dx_editor_content );
+	$dx_sanitized_margin = esc_html( absint( $dx_margin_field_value ) );
 
 	update_option( $dx_redirect_name, $dx_redirect_value );
 	update_option( $dx_date_name, $dx_date_value );
