@@ -311,7 +311,7 @@ function dx_add_global_counter_shortcode( $atts ) {
 	return global_counter_shortocde_handle( $attributes['time'] );
 }
 
-add_action( 'wp_ajax_add_to_base', 'add_to_base_dxds' );
+add_action( 'wp_ajax_add_to_base_dxds', 'add_to_base_dxds' );
 function add_to_base_dxds() {
 	if ( isset( $_POST['data'] ) && isset( $_POST['data']['enable-banner'] ) ) {
 		update_option( 'enable-banner', $_POST['data']['enable-banner'] );
