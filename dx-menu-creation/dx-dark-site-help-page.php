@@ -82,7 +82,7 @@
 				<img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/image3.png'; ?>" alt="" style="border: 5px solid #555"/>
 
 				<p>The second section in the <b>Main</b> tab - <b>DX Countdown Banner</b> contains more elements. The first one - checkbox(*1)
-			 	for enabling/disabling the banner functionality, followed by date(*2) and time(*3) pickers,the fourth is а WordPress editor(*4),
+				for enabling/disabling the banner functionality, followed by date(*2) and time(*3) pickers,the fourth is а WordPress editor(*4),
 				where to add the custom content and the shortcode, the next is input field(*5) for setting margin top from 0-20 and the last one is upload button(*6) for custom image
 				uploading.
 				</p>

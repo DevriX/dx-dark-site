@@ -49,7 +49,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 		$dx_margin_field_value_second_banner = esc_html( $_POST[ $dx_margin_field_name_second_banner ] );
 
 		$dx_sanitized_content_second_banner = sanitize_text_field( $dx_editor_content_second_banner );
-		$dx_sanitized_margin_second_banner = esc_html( absint( $dx_margin_field_value_second_banner ) );
+		$dx_sanitized_margin_second_banner  = esc_html( absint( $dx_margin_field_value_second_banner ) );
 
 
 		update_option( $dx_redirect_name_second_banner, $dx_redirect_value_second_banner );
@@ -71,9 +71,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 		<?php
 	}
 
-	$checkbox_enable_banner_settings  = '<input type="checkbox" id="enable-banner" name="enable-banner" value="1" ' . checked( 1, get_option( 'enable-banner' ), false ) . '/>';
-	$checkbox_enable_banner_label     = '<label for="enable-banner"> Enable banner </label>';
-	$checkbox_enable_banner_settings .= $checkbox_enable_banner_label;
+	$checkbox_enable_banner_settings = '<input type="checkbox" id="enable-banner" name="enable-banner" value="1" ' . checked( 1, get_option( 'enable-banner' ), false ) . '/>';
 
 	?>
 	<div class="wrap">
@@ -82,17 +80,18 @@ if ( ! current_user_can( 'manage_options' ) ) {
 
 			<input type="hidden" name="<?php echo $dx_hidden_field_name_second_banner; ?>" value="Y">
 
-			<h2 class="description"><?php _e( $checkbox_enable_banner_settings, 'dx-dark-site' ); ?></h2>
+			<h2 class="description"><?php echo $checkbox_enable_banner_settings; ?> Enable banner</h2>
 
 			<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
 				<input type="text" required name="<?php echo $dx_redirect_name_second_banner; ?>" value="<?php echo $dx_redirect_value_second_banner; ?>" size="40">
 			</p><hr />
-			
+
 			<p><?php _e( 'Seconds:', 'dx-dark-site-redirection' ); ?>
 				<input type="text" required name="<?php echo $dx_seconds_name_second_banner; ?>" value="<?php echo $dx_seconds_value_second_banner; ?>" size="10">
 			</p><hr />
 
 			<p>
+				<p><?php _e( '<span class="dashicons dashicons-editor-help"></span> Placing <b>[counter]</b> in your message will show the banner and the remaining time before redirection.', 'dx-dark-site-redirection' ); ?></p>
 				<?php wp_editor( wp_unslash( $dx_editor_content_second_banner ), $dx_editor_id_second_banner, $editor_settings_second_banner ); ?>
 			</p>
 

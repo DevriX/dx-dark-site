@@ -55,7 +55,7 @@ if ( isset( $_POST[ $dx_hidden_field_name ] ) && 'Y' === $_POST[ $dx_hidden_fiel
 	$dx_time_value         = $_POST[ $dx_time_name ];
 	$dx_margin_field_value = esc_html( $_POST[ $dx_margin_field_name ] );
 	$dx_sanitized_content  = sanitize_text_field( $dx_editor_content );
-	$dx_sanitized_margin = esc_html( absint( $dx_margin_field_value ) );
+	$dx_sanitized_margin   = esc_html( absint( $dx_margin_field_value ) );
 
 	update_option( $dx_redirect_name, $dx_redirect_value );
 	update_option( $dx_date_name, $dx_date_value );
@@ -76,13 +76,10 @@ if ( isset( $_POST[ $dx_hidden_field_name ] ) && 'Y' === $_POST[ $dx_hidden_fiel
 	<?php
 }
 
-$checkbox_enable_redirection_settings  = '<input type="checkbox" id="enable-redirection" name="enable-redirection" value="1" ' . checked( 1, get_option( 'enable-redirection' ), false ) . '/>';
-$checkbox_enable_redirection_label     = '<label for="enable-redirection"> Enable redirection </label>';
-$checkbox_enable_redirection_settings .= $checkbox_enable_redirection_label;
+$checkbox_enable_redirection_settings = '<input type="checkbox" id="enable-redirection" name="enable-redirection" value="1" ' . checked( 1, get_option( 'enable-redirection' ), false ) . '/>';
 
-$checkbox_enable_countdown_banner_settings  = '<input type="checkbox" id="enable-countdown-banner" name="enable-countdown-banner" value="1" ' . checked( 1, get_option( 'enable-countdown-banner' ), false ) . '/>';
-$checkbox_enable_countdown_banner_label     = '<label for="enable-countdown-banner"> Enable banner </label>';
-$checkbox_enable_countdown_banner_settings .= $checkbox_enable_countdown_banner_label;
+$checkbox_enable_countdown_banner_settings = '<input type="checkbox" id="enable-countdown-banner" name="enable-countdown-banner" value="1" ' . checked( 1, get_option( 'enable-countdown-banner' ), false ) . '/>';
+
 
 ?>
 <div class="wrap">
@@ -92,22 +89,23 @@ $checkbox_enable_countdown_banner_settings .= $checkbox_enable_countdown_banner_
 	<input type="hidden" name="<?php echo $dx_hidden_field_name; ?>" value="Y">
 
 	<p><?php _e( 'Redirect to:', 'dx-dark-site-redirection' ); ?>
-		<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40"> <b><?php _e( $checkbox_enable_redirection_settings, 'dx-dark-site' ); ?></b>
+		<input type="text" name="<?php echo $dx_redirect_name; ?>" value="<?php echo $dx_redirect_value; ?>" size="40"> <b><?php echo $checkbox_enable_redirection_settings; ?> Enable redirection</b>
 	</p><hr />
 
 	<h1><?php _e( 'DX Countdown Banner', 'dx-dark-site' ); ?></h1>
 
-	<h2 class="description"><?php _e( $checkbox_enable_countdown_banner_settings, 'dx-dark-site' ); ?></h2>
+	<h2 class="description"><?php echo $checkbox_enable_countdown_banner_settings; ?> Enable banner</h2>
 
-	<p><?php _e("Expiry Date:", 'dx-dark-site' ); ?>
+	<p><?php _e( 'Expiry Date:', 'dx-dark-site' ); ?>
 		<input type="date" name="<?php echo $dx_date_name; ?>" value="<?php echo $dx_date_value; ?>">
 	</p><hr />
 
-	<p><?php _e("Expiry Time:", 'dx-dark-site' ); ?>
+	<p><?php _e( 'Expiry Time:', 'dx-dark-site' ); ?>
 		<input type="time" step=1 name="<?php echo $dx_time_name; ?>" value="<?php echo $dx_time_value; ?>">
 	</p><hr />
 
 	<p>
+		<p><?php _e( '<span class="dashicons dashicons-editor-help"></span> Placing <b>[global-counter]</b> in your message will show a countdown timer.', 'dx-dark-site' ); ?></p>
 		<?php wp_editor( wp_unslash( $dx_editor_content ), $dx_editor_id, $editor_settings ); ?>
 	</p>
 

@@ -46,7 +46,7 @@ if ( '1' === $option_banner && strpos( get_option( 'dx_my_editor_second_banner' 
 	}
 }
 
-if ( '1' === $option_countdown_banner && strpos( get_option( 'dx_my_editor' ), '[global-counter' ) !== false ) {
+if ( '1' === $option_countdown_banner ) {
 	add_action( 'wp_head', 'dx_darksite_notice' );
 	add_shortcode( 'global-counter', 'dx_add_global_counter_shortcode' );
 
@@ -221,7 +221,7 @@ function dx_darksite_notice_redirection_banner() {
 
 			$dx_unslashed_content_second_banner = wp_unslash( $dx_editor_content_second_banner );
 
-			$dx_content_second_banner   = wp_kses_data( $dx_unslashed_content_second_banner );
+			$dx_content_second_banner = wp_kses_data( $dx_unslashed_content_second_banner );
 			?>
 			<div id="darksite-banner" class="darksite-notice">
 				<div class="darksite-notice-container">
@@ -288,7 +288,7 @@ function dx_add_counter_shortcode( $atts ) {
 
 	$attributes = shortcode_atts(
 		array(
-			'seconds' => get_option('dx_seconds_to_second_banner'),
+			'seconds' => get_option( 'dx_seconds_to_second_banner' ),
 		),
 		$atts
 	);
