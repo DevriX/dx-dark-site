@@ -7,6 +7,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 		'media_buttons' => false,
 		'quicktags'     => false,
 		'teeny'         => true,
+		'textarea_rows' => 10,
 	);
 
 	// set all input names as php vars
@@ -103,9 +104,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 				<?php dx_get_uploader(); ?>
 			</p>
 
-			<p class="submit">
-				<?php submit_button( 'Save', 'primary' ); ?>
-			</p>
+			<?php submit_button( 'Save', 'primary' ); ?>
 
 		</form>
 	</div>

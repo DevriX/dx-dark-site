@@ -6,6 +6,7 @@ $editor_settings = array(
 	'media_buttons' => false,
 	'quicktags'     => false,
 	'teeny'         => true,
+	'textarea_rows' => 10,
 );
 
 // set all input names as php vars
@@ -117,9 +118,7 @@ $checkbox_enable_countdown_banner_settings = '<input type="checkbox" id="enable-
 		<?php dx_get_uploader(); ?>
 	</p>
 
-	<p class="submit">
-		<?php submit_button( 'Save', 'primary' ); ?>
-	</p>
+	<?php submit_button( 'Save', 'primary' ); ?>
 
 </form>
 </div>
