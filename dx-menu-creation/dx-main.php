@@ -151,7 +151,7 @@ $checkbox_enable_countdown_banner_settings = '<input type="checkbox" id="enable-
 	</p><hr />
 
 	<p>
-		<p><?php _e( '<span class="dashicons dashicons-editor-help"></span> Placing <b>[global-counter]</b> in your message will show a countdown timer.', 'dx-dark-site' ); ?></p>
+		<p><?php _e( '<span class="dashicons dashicons-editor-help"></span> Placing <b>[global-counter]</b> in your message will show a countdown timer. Banner will not be displayed, if no message is set.', 'dx-dark-site' ); ?></p>
 		<?php wp_editor( wp_unslash( $dx_editor_content ), $dx_editor_id, $editor_settings ); ?>
 	</p>
 
