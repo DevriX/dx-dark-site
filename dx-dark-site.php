@@ -137,6 +137,7 @@ function dx_darksite_notice() {
 			$dx_editor_content = get_option( 'dx_my_editor' );
 			$dx_date           = get_option( 'dx_date' );
 			$dx_time           = get_option( 'dx_time' );
+			$dx_custom_image   = get_option( 'dx-dark-site-image' );
 
 			$dx_unslashed_content = wp_unslash( $dx_editor_content );
 			$dx_unslashed_date    = wp_unslash( $dx_date );
@@ -158,17 +159,19 @@ function dx_darksite_notice() {
 			$minutes = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 ) / 60 );
 			$seconds = floor( ( $diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60 - $minutes * 60 ) );
 			?>
-			<?php if ( $expiry_date >= $current_date ) : ?>
 			<div id="darksite-banner" class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
-						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png'; ?>" alt="warning">
+						<?php if ( empty( $dx_custom_image ) ) { ?>
+							<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png'; ?>" alt="warning">
+						<?php } else { ?>
+							<img src="<?php echo $dx_custom_image; ?>" alt="warning">
+						<?php } ?>
 					</div>
 					<div class="darksite-notice-content"><?php echo apply_filters( 'the_content', $dx_content ); ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div><!-- .darksite-notice-container -->
 			</div><!-- .darksite-notice -->
-			<?php endif; ?>
 
 			<style type="text/css">
 				.darksite-notice { margin-top: <?php echo $dx_margin_top; ?>rem; }
@@ -217,17 +220,20 @@ function dx_darksite_notice_redirection_banner() {
 				$dx_margin_top_second_banner = 0;
 			}
 
-			$dx_editor_content_second_banner = get_option( 'dx_my_editor_second_banner' );
-
+			$dx_editor_content_second_banner    = get_option( 'dx_my_editor_second_banner' );
 			$dx_unslashed_content_second_banner = wp_unslash( $dx_editor_content_second_banner );
+			$dx_content_second_banner           = wp_kses_data( $dx_unslashed_content_second_banner );
+			$dx_custom_image_redirection_banner = get_option( 'dx-dark-site-image-redirection-banner' );
 
-			$dx_content_second_banner = wp_kses_data( $dx_unslashed_content_second_banner );
 			?>
 			<div id="darksite-banner" class="darksite-notice">
 				<div class="darksite-notice-container">
 					<div class="darksite-notice-image">
-						<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png'; ?>" alt="warning">
-					</div>
+						<?php if ( empty( $dx_custom_image_redirection_banner ) ) { ?>
+							<img src="<?php echo plugin_dir_url( __FILE__ ) . 'assets/images/error-64-warning.png'; ?>" alt="warning">
+						<?php } else { ?>
+							<img src="<?php echo $dx_custom_image_redirection_banner; ?>" alt="warning">
+						<?php } ?>					</div>
 					<div class="darksite-notice-content"><?php echo apply_filters( 'the_content', $dx_content_second_banner ); ?></div>
 					<button id="darksite-notice-button" class="darksite-notice-button" onclick="SetDarksiteCookie()"><span>+</span></button>
 				</div><!-- .darksite-notice-container -->
