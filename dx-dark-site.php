@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: DX Dark Site
+ * Plugin Name: DevriX Dark Site
  * Description: Plugin for emergency redirections and notices
  * Version:     1.0.0
  * Author:      DevriX
