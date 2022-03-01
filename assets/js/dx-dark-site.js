@@ -25,10 +25,7 @@ $(document).ready(function($) {
         }
     });
 
-});
-
-$(document).ready(function($) {
-    $("#enable-countdown-banner").change( function() {
+	    $("#enable-countdown-banner").change( function() {
 
         if($('#enable-countdown-banner').is(':checked')) {
             alert("Countdown banner is enabled.");
@@ -56,9 +53,6 @@ $(document).ready(function($) {
         }
     });
 
-});
-
-$(document).ready(function($) {
     $("#enable-redirection").change( function() {
 
         if($('#enable-redirection').is(':checked')) {
@@ -86,5 +80,4 @@ $(document).ready(function($) {
             $.post( ajaxurl, { data: { "enable-redirection" : ajax_field_value }, action: "add_to_base_dxds" } );
         }
     });
-
 });
